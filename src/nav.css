@@ -1,0 +1,48 @@
+nav {
+  list-style-type: none;
+  background-color: #333;
+  color: white;
+  max-width: 18vw;
+  height: 100vh;
+  position: fixed;
+}
+
+nav li button {
+  display: block;
+  width: 100%;
+  color: #eee;
+  padding: 5% 15%;
+  text-decoration: none;
+  background-color: transparent;
+  text-align: left;
+  outline: none;
+  border: none;
+  font-size: 1.25vw;
+  transition: color 250ms ease;
+}
+
+li button:hover {
+  color: #aaa;
+  transition: color 250ms ease;
+  cursor: pointer;
+}
+
+.logo-container {
+  padding: 10%;
+}
+
+.logo-container:hover {
+  cursor: pointer;
+}
+
+.logo {
+  max-width: 15%;
+  aspect-ratio: 1;
+  padding: 15% 20% 0%;
+}
+
+.logo-name {
+  padding: 20%;
+  font-size: 2vw;
+  font-weight: 100;
+}
