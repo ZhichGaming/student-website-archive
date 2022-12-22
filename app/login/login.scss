@@ -130,14 +130,16 @@ input {
       opacity:  .30; 
     }
   }
-  input:focus {
+  input:focus, input:not(:placeholder-shown) {
     padding:  28px 0px 12px 0px;
   }
-  input:focus + label {
-    transform:  translateY(-10px); 
-    opacity:  .7; 
+  input:focus, input:not(:placeholder-shown) {
+    + label {
+      transform:  translateY(-10px); 
+      opacity:  .7; 
+    }
   }
-  input:focus::placeholder {
+  input:focus::placeholder{
     opacity: 0;
   }
   input:valid:not(:placeholder-shown) + label + .icon {
