@@ -13,7 +13,7 @@ html, body {
   justify-content:  flex-start; 
   background:  #f3f2f2; 
 }
-h4 {
+h1 {
   font-size:  24px; 
   font-weight:  600; 
   color:  #000; 
@@ -25,7 +25,7 @@ label {
   opacity:  .8;
   font-weight:  400; 
 }
-form {
+.form {
   padding:  20% 10%; 
   background:  #fefefe; 
   display:  flex; 
@@ -75,6 +75,7 @@ button {
   &:hover {
     transform:  translateY(-3px);
     box-shadow:  0 2px 6px -1px rgba($primary, .65);
+    cursor: pointer;
     &:active {
       transform:  scale(.99);
     }
@@ -113,7 +114,7 @@ input {
     padding-left:  44px; 
   }
   input {
-    max-width:  calc(100% - 44px); 
+    max-width:  calc(100% - 30px); 
     margin-left:  auto;
     display:  flex; 
   }
@@ -135,6 +136,9 @@ input {
   input:focus + label {
     transform:  translateY(-10px); 
     opacity:  .7; 
+  }
+  input:focus::placeholder {
+    opacity: 0;
   }
   input:valid:not(:placeholder-shown) + label + .icon {
     svg {
