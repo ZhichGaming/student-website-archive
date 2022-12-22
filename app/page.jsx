@@ -1,4 +1,4 @@
-import "./globals.css"
+import "./globals.scss"
 
 export default function HomePage() {
   return (
@@ -7,3 +7,4 @@ export default function HomePage() {
     </>
   )
 }
+
