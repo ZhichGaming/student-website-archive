@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
+import PocketBase from 'pocketbase'
 import "./login.scss"
 
 export default function Login() {
@@ -9,9 +10,8 @@ export default function Login() {
   const [password, setPassword] = useState(null)
   
   const validateCredidentials = async() => {
-    await fetch("http://127.0.0.1:8090/api/", {
-      method: "POST",
-    })
+    const pb = new PocketBase('https://pocketbase.io')
+    const authData = await pb.collection('users').authWithPassword('YOUR_USERNAME_OR_EMAIL', '1234567890')
   }
 
   return (
