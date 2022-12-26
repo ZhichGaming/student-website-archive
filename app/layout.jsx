@@ -1,3 +1,5 @@
+import "./globals.scss"
+
 export default function RootLayout({ children }) {
   return (
     <html>
@@ -7,7 +9,7 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
-        {children}
+        { children }
       </body>
     </html>
   )

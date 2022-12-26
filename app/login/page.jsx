@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import PocketBase from 'pocketbase'
+// import PocketBase from 'pocketbase'
 import "./login.scss"
 
 export default function Login() {
@@ -10,8 +10,8 @@ export default function Login() {
   const [password, setPassword] = useState(null)
   
   const validateCredidentials = async() => {
-    const pb = new PocketBase('https://pocketbase.io')
-    const authData = await pb.collection('users').authWithPassword('YOUR_USERNAME_OR_EMAIL', '1234567890')
+    // const pb = new PocketBase('https://pocketbase.io')
+    // const authData = await pb.collection('users').authWithPassword('YOUR_USERNAME_OR_EMAIL', '1234567890')
   }
 
   return (
@@ -32,7 +32,7 @@ export default function Login() {
           {/* <a href="https://www.flaticon.com/free-icons/key" title="key icons">Key icons created by Tempo_doloe - Flaticon</a> */}
         </div>
       </div>
-      <button type="none" onClick={()=>{handleSubmit()}}>Log in</button>
+      <button type="none" onClick={validateCredidentials}>Log in</button>
     </>
   )
 }

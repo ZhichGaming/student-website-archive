@@ -6,9 +6,8 @@ export default function LoginPageLayout({ children }) {
   return (
     <Suspense fallback={<Loading />}>
       <div className="session">
-        <div className="left">
-            
-        </div>
+        <div className="left"></div>
+        
         <div className="form log-in">
           <h1>Collège Jean de la Mennais</h1>
           {children}
