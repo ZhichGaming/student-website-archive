@@ -1,6 +1,5 @@
-"use client"
-
-import { Banner, NavBar } from "./Components.jsx"
+import NavBar from "./NavBar.jsx"
+import Banner from "../Banner.jsx"
 
 export default function ConsolePage() {
   return (

@@ -1,13 +1,8 @@
 import Image from "next/image"
-import Link from "next/link";
+import AccountButton from "./AccountButton"
+import "./banner.scss"
 
-export { Banner, NavBar };
-
-function Banner() {
-  const disconnect = async() => {
-
-  }
-
+export default function Banner() {
   return (
     <div className="banner">
       <ul className="container">
@@ -15,17 +10,9 @@ function Banner() {
           <Image className="logo-image" src="/jdlm-logo.png" alt="" width={930} height={347} priority />
         </li>
         <li className="disconnect">
-          <button className="disconnect-button" onClick={disconnect}>Disconnecter</button>
+          <AccountButton />
         </li>
       </ul>
     </div>
-  )
-}
-
-function NavBar() {
-  return (
-    <nav className="nav">
-
-    </nav>
   )
 }
