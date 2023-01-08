@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export default function AccountButton() {
   let [user, setUser] = useState({})
-  const router = useRouter()
+  let router = useRouter()
 
   const disconnect = async() => {
     console.log("disconnect");
@@ -14,7 +14,7 @@ export default function AccountButton() {
   }
   const redirectToLogin = async() => {
     console.log("login");
-    router.push("login")
+    router.push("/login")
   }
 
 
