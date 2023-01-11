@@ -1,32 +1,20 @@
-* {
-  font-family: -apple-system, BlinkMacSystemFont, "San Francisco", Helvetica, Arial, sans-serif;
-  font-weight:  300;
-}
-$primary: rgb(182,157,230); 	
-html, body {
-  height:  100vh; 
-  width:  100vw;
-  display:  flex; 
-  align-items:  flex-start; 
-  justify-content:  flex-start; 
-  background:  #f3f2f2; 
-}
-h1 {
+$primary: rgb(182,157,230);
+.title {
   font-size:  24px; 
   font-weight:  600; 
   color:  #000; 
   opacity:  .85; 
 }
-label {
+.inputLabel {
   font-size:  12.5px; 
   color:  #000;
   opacity:  .8;
   font-weight:  400; 
 }
 .form {
-  padding:  20% 10%; 
+  padding: 20% 10%; 
   background:  #fefefe; 
-  display:  flex; 
+  display: flex; 
   flex-direction:  column;
   align-items:  flex-start; 
   max-width:  300px; 
@@ -39,20 +27,7 @@ label {
     }
   }
 }
-a.discrete {
-    color:  rgba(#000, .4); 
-    font-size:  14px; 
-    border-bottom:  solid 1px rgba(#000, .0);
-    padding-bottom:  4px;  
-    margin-left:  auto; 
-    font-weight:  300; 
-    transition:  all .3s ease; 
-    margin-top:  40px; 
-    &:hover {
-      border-bottom:  solid 1px rgba(#000, .2);
-    }
-  }
-button {
+.submit {
   -webkit-appearance:  none; 
   appearance: none;
   max-width:  auto;
@@ -68,18 +43,18 @@ button {
   font-weight:  500; 
   box-shadow:  0px 2px 6px -1px rgba(0,0,0,.13); 
   border:  none;
-  transition:  all .3s ease; 
-  outline: 0; 
-  &:hover {
-    transform:  translateY(-3px);
-    box-shadow:  0 2px 6px -1px rgba($primary, .65);
+  outline: none;
+  transition: all .3s ease;
+  &:where(:hover, :focus) {
+    transform: translateY(-3px);
+    box-shadow: 0px 3px 6px -1px rgb(0, 0, 0);
     cursor: pointer;
     &:active {
       transform:  scale(.99);
     }
   }
 }
-input {
+.input {
   font-size:  16px; 
   padding:  20px 0px; 
   max-height:  56px; 
@@ -89,8 +64,8 @@ input {
   max-width:  280px; 
   box-sizing:  border-box; 
   transition:  all .3s linear; 
-  color:  #000; 
-  font-weight:  400;
+  color:  $primary; 
+  font-weight: 400;
   -webkit-appearance:  none; 
   appearance: none;
   &:focus {
@@ -99,13 +74,14 @@ input {
     box-shadow:  0 2px 6px -8px rgba($primary, .45);
   }
 }
-.floating-label {
+.floatingLabel {
   position:  relative; 
   margin-bottom:  15px;
   max-width:  100%; 
   label {
     position:  absolute; 
     top: calc(50% - 10px);
+    z-index: -1;
     left:  0; 
     opacity:  0; 
     transition:  all .3s ease; 
@@ -134,7 +110,8 @@ input {
   input:focus, input:not(:placeholder-shown) {
     + label {
       transform:  translateY(-10px); 
-      opacity:  .7; 
+      opacity:  .7;
+      z-index: 1;
     }
   }
   input:focus::placeholder{
@@ -142,7 +119,7 @@ input {
   }
   input:valid:not(:placeholder-shown) + label + .icon {
     svg {
-      opacity:  1; 
+      opacity:  1;
       path {
         fill:  $primary; 
       }      
@@ -163,14 +140,17 @@ $displacement:  3px;
   100% { transform: translateX(0px);}
 }
 .session {
+  position: absolute;
   display:  flex; 
   flex-direction:  row; 
   max-width:  auto; 
   max-height:  auto; 
-  margin:  auto auto; 
-  background:  #ffffff; 
-  border-radius:  4px; 
-  box-shadow:  0px 2px 6px -1px rgba(0,0,0,.12);
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  background: #ffffff; 
+  border-radius: 4px;
+  box-shadow:  3px 3px 10px -1px rgba(0,0,0,.12);
 }
 .left {
   min-width:  220px; 

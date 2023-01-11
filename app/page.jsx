@@ -1,11 +1,9 @@
 "use client"
 
-import { useRouter } from "next/router"
 import Banner from "./Banner.jsx"
 import "./globals.scss"
 
 export default function Lobby() {
-  // const Router = useRouter()
   return (
     <>
       <Banner />

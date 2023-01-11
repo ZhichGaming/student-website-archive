@@ -1,31 +1,26 @@
 "use client"
 
-import { useRouter } from "next/router";
-import { useState } from "react";
+import Link from "next/link";
+import { useRef, useState } from "react";
 
 
 export default function AccountButton() {
-  let [user, setUser] = useState({})
-  const router = useRouter()
+  const loginButton = useRef(null)
+  let [user, setUser] = useState("")
 
-  const disconnect = async() => {
-    console.log("disconnect");
-    setUser("")
-  }
   const redirectToLogin = async() => {
-    console.log("login");
-    router.push("login")
+    loginButton.current.click()
   }
-
-
-  const button = 
-    <button 
-      className="disconnect-button" 
-      onClick={()=>user? disconnect():redirectToLogin()}>
-        {user?"déconnecter":"connecter"}
-    </button>
+    
 
   return (
-    button
+    <>
+      <button 
+        className="disconnect-button" 
+        onClick={()=>user? /* add profile */ "":redirectToLogin()}>
+          {user?"déconnecter":"connecter"}
+      </button>
+      <Link href={"/login"} ref={loginButton} />
+    </>
   )
 }
