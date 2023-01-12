@@ -8,7 +8,6 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
-    // list-style-type: none;
     margin: 0;
     padding: 15px;
     align-items: center;
@@ -25,11 +24,11 @@
         transition: background-color ease 250ms;
         outline: none;
         border: #000 solid 1px;
-        border-radius: 10px;
+        border-radius: 500px;
         &:hover {
           transition: background-color ease 250ms;
           cursor: pointer;
-          background-color: rgb(93, 151, 239);
+          background-color: $primary-light;
         }
       }
       .logo-image {

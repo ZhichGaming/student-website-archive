@@ -4,6 +4,10 @@ const nextConfig = {
   experimental: {
     appDir: true
   },
+  sassOptions: {
+    // includePaths: [path.join(__dirname, "app")],
+    additionalData: `@use "~/app/variables.scss" as *;`,
+  }
 }
 
 module.exports = nextConfig

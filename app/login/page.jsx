@@ -13,11 +13,9 @@ export default function Login(res) {
   const redirectButton = useRef(null)
   
   const validateCredidentials = async() => {
-    // const pb = new PocketBase('https://pocketbase.io')
-    // const authData = await pb.collection('users').authWithPassword('YOUR_USERNAME_OR_EMAIL', '1234567890')
-
     // * for now, it only redirects to student console
-    redirectButton.current.click()
+    console.log(">>", usernameRef.current.value, passwordRef.current.value);
+    // redirectButton.current.click(
   }
 
 
