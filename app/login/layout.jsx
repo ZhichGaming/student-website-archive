@@ -1,5 +1,9 @@
 import { Suspense } from "react";
+<<<<<<< HEAD
 import Loading from "./loading.jsx"
+=======
+import Loading from "./loading.jsx";
+>>>>>>> 5192a5e844ea75836fc76e357dd15114275816d3
 import styles from "./login.module.scss"
 
 

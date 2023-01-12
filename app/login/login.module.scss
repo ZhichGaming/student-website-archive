@@ -35,7 +35,7 @@
   text-align:  center; 
   padding:  15px 40px;
   margin-top:  15px; 
-  background-color:  saturate($primary, 30%); 
+  background-color:  var(--primary); 
   color:  #fff; 
   font-size:  14px;
   margin-left:  auto; 
@@ -63,14 +63,14 @@
   max-width:  280px; 
   box-sizing:  border-box; 
   transition:  all .3s linear; 
-  color:  $primary; 
+  color:  var(--primary-light); 
   font-weight: 400;
   -webkit-appearance:  none; 
   appearance: none;
   &:focus {
-    border-bottom:  solid 1px $primary; 
+    border-bottom:  solid 1px var(--primary); 
     outline: 0; 
-    box-shadow:  0 2px 6px -8px rgba($primary, .45);
+    box-shadow:  0 2px 6px -8px rgba(var(--primary), .45);
   }
 }
 .floatingLabel {
@@ -120,7 +120,7 @@
     svg {
       opacity:  1;
       path {
-        fill:  $primary; 
+        fill:  var(--primary); 
       }      
     }
   }
