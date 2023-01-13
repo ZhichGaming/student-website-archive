@@ -1,0 +1,59 @@
+.grid {
+  display: grid;
+  grid-template-areas: 
+    "🚩 🚩"
+    "🧭 📰";
+  grid-template-columns: 1fr 5fr;
+  grid-template-rows: 1fr 5fr;
+  justify-items: stretch;
+  height: 100vh;
+}
+
+.banner {
+  grid-area: 🚩;
+  background-color: red;
+  display: block;
+  height: 100%;
+  ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin: 0;
+    padding: 15px;
+    align-items: center;
+    li {
+      display: inline;
+      font-family: "Fira Sans", sans-serif;
+      font-size: 1vw;
+      justify-content: center;
+      img {
+        max-height: 10vh;
+        width: auto;
+        transition: background-color ease 250ms;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      .logoImage {
+        filter: invert(100%);
+        height: min(10vw, 150px);
+        width: auto;
+      }
+    }
+  }
+}
+
+.navBar {
+  grid-area: 🧭;
+  background-color: aquamarine;
+  display: block;
+  height: 100%;
+}
+
+.page {
+  grid-area: 📰;
+  background-color: yellow;
+  display: block;
+  height: 100%;
+}

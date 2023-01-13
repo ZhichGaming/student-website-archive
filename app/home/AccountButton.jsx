@@ -1,6 +1,6 @@
 "use client"
 
-import Link from "next/link";
+import Image from "next/image";
 import { useRef, useState } from "react";
 
 
@@ -15,12 +15,7 @@ export default function AccountButton() {
 
   return (
     <>
-      <button 
-        className="disconnect-button" 
-        onClick={()=>user? /* add profile */ "":redirectToLogin()}>
-          {user?"déconnecter":"connecter"}
-      </button>
-      <Link href={"/login"} ref={loginButton} />
+      <Image src={"/logout.png"} alt="" width={512} height={512} />
     </>
   )
 }

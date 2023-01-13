@@ -1,8 +1,7 @@
 import Image from "next/image"
 import AccountButton from "./AccountButton"
-import styles from "./Banner.module.scss"
 
-export default function Banner() {
+function Banner({ styles }) {
   return (
     <div className={styles.banner}>
       <ul>
@@ -16,3 +15,15 @@ export default function Banner() {
     </div>
   )
 }
+
+function NavBar({ styles }) {
+  return (
+    <nav className={styles.navBar}>
+      <div>Lorem, ipsum dolor.</div>
+      <div>Eaque, natus inventore.</div>
+      <div>Magnam, eos doloremque?</div>
+    </nav>
+  )
+}
+
+export { Banner, NavBar}

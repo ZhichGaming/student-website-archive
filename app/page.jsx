@@ -1,11 +1,10 @@
-import NavBar from "./NavBar.jsx"
-import Banner from "./Banner.jsx"
+import { redirect } from 'next/navigation';
 
-export default function HomePage() {
-  return (
-    <>
-      <Banner />
-      <NavBar />
-    </>
-  )
+export default function Lobby() {
+  const userToken = true;
+  if (userToken == true) {
+    redirect("/home")
+  } else {
+    redirect("/login")
+  }
 }
