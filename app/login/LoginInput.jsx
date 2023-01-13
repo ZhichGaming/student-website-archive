@@ -1,14 +1,22 @@
 import Image from "next/image"
-import React from "react"
+import React, { forwardRef } from "react"
 
 /**
  * @param {{ type: string, reference: React.useRef, styles: styles.module}} props
  * @returns React.Component
  */
-export default function LoginInput(props) {
+export default function LoginInput(props, ref) {
   return (
     <div className={props.styles.floatingLabel}>
-      <input placeholder={props.type} type={props.type} name={props.type} autoComplete="off" ref={props.reference} className={props.styles.input} />
+      <input
+        placeholder={props.type}
+        type={props.type}
+        name={props.type}
+        autoComplete="off"
+        ref={ref}
+        className={props.styles.input}
+        required
+      />
       <label htmlFor={props.type}>{props.type}</label>
       <div className={props.styles.icon}>
         <Image src={`/login/${props.type.toLowerCase()}.png`} alt="" width="30" height="30" className={props.styles.image} />
@@ -17,3 +25,4 @@ export default function LoginInput(props) {
     </div>
   )
 }
+LoginInput = forwardRef(LoginInput);

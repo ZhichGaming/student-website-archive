@@ -1,15 +1,18 @@
+import React from "react"
 import "./globals.scss"
 
 export default function RootLayout({ children }) {
   return (
     <html>
       <head>
-        <title></title>
+        <title>Portail des Élèves</title>
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
-        { children }
+        <React.StrictMode>
+          { children }
+        </React.StrictMode>
       </body>
     </html>
   )

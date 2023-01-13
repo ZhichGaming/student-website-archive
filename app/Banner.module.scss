@@ -1,3 +1,4 @@
+$width: 15vw;
 .banner {
   background-color: #eee;
   position: fixed;
@@ -31,7 +32,7 @@
           background-color: $primary-light;
         }
       }
-      .logo-image {
+      .logoImage {
         filter: invert(100%);
         width: min(15vw, 150px);
         height: auto;

@@ -12,18 +12,18 @@ export default function Login(res) {
   const passwordRef = useRef(null)
   const redirectButton = useRef(null)
   
-  const validateCredidentials = async() => {
+  const validateCredidentials = async(e) => {
     // * for now, it only redirects to student console
-    console.log(">>", usernameRef.current.value, passwordRef.current.value);
-    // redirectButton.current.click(
+    // console.log(">>", usernameRef.current.value, passwordRef.current.value);
+    redirectButton.current.click();
   }
 
 
   return (
     <>
-      <LoginInput type="Username" reference={usernameRef} styles={styles} />
-      <LoginInput type="Password" reference={passwordRef} styles={styles} />
-      <button type="none" className={styles.submit} onClick={validateCredidentials}>Log in</button>
+      <LoginInput type="Username" ref={usernameRef} styles={styles} />
+      <LoginInput type="Password" ref={passwordRef} styles={styles} />
+      <button type="submit" className={styles.submit} onClick={validateCredidentials}>Log in</button>
       <Link href={"/student-console"} ref={redirectButton} tabIndex="-1" />
     </>
   )

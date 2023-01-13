@@ -1,13 +1,11 @@
-"use client"
-
+import NavBar from "./NavBar.jsx"
 import Banner from "./Banner.jsx"
-import "./globals.scss"
 
-export default function Lobby() {
+export default function HomePage() {
   return (
     <>
       <Banner />
-      <h1>[Home page goes here]</h1>
+      <NavBar />
     </>
   )
 }
