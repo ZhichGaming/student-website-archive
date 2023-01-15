@@ -2,11 +2,17 @@ import Image from "next/image"
 import AccountButton from "./AccountButton"
 
 function Banner({ styles }) {
+  const today = new Date().toLocaleDateString("fr-FR", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).split(" ")
+  today[0] = today[0][0].toUpperCase() + today[0].substring(1)
+
   return (
-    <div className={styles.banner}>
+    <div className={`${styles["banner"]}`}>
       <ul>
         <li>
-          <Image className={styles.logoImage} src="/jdlm-logo.png" alt="" width={930} height={347} priority />
+          {`${today[0]}, Le ${today[1]} ${today[2]} ${today[3]}`}
+        </li>
+        <li>
+          <Image className={styles["logo-image"]} src="/jdlm-logo.png" alt="" width={930} height={347} priority />
         </li>
         <li className="disconnect">
           <AccountButton />
@@ -16,14 +22,17 @@ function Banner({ styles }) {
   )
 }
 
-function NavBar({ styles }) {
+function Navbar({ styles }) {
+  const theme = "darkmode"
   return (
-    <nav className={styles.navBar}>
-      <div>Lorem, ipsum dolor.</div>
-      <div>Eaque, natus inventore.</div>
-      <div>Magnam, eos doloremque?</div>
+    <nav className={styles.navbar}>
+      <div><Image src={`/navicon/${theme}/fi-rr-home.svg`} alt="" height={50} width={50} className={styles["nav-icon"]} /></div>
+      <div><Image src={`/navicon/${theme}/fi-rr-envelope.svg`} alt="" height={50} width={50} className={styles["nav-icon"]} /></div>
+      <div><Image src={`/navicon/${theme}/fi-rr-book.svg`} alt="" height={50} width={50} className={styles["nav-icon"]} /></div>
+      <div><Image src={`/navicon/${theme}/fi-rr-grades.svg`} alt="" height={50} width={50} className={styles["nav-icon"]} /></div>
+      <div><Image src={`/navicon/${theme}/fi-rr-home.svg`} alt="" height={50} width={50} className={styles["nav-icon"]} /></div>
     </nav>
   )
 }
 
-export { Banner, NavBar}
+export { Banner, Navbar }

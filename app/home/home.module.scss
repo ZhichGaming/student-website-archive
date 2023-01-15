@@ -1,59 +1,77 @@
-.grid {
-  display: grid;
-  grid-template-areas: 
-    "🚩 🚩"
-    "🧭 📰";
-  grid-template-columns: 1fr 5fr;
-  grid-template-rows: 1fr 5fr;
-  justify-items: stretch;
-  height: 100vh;
+@mixin full-width {
+  width: 100% !important;
 }
 
+$banner-height: 75px;
+$banner-padding: 15px;
 .banner {
-  grid-area: 🚩;
-  background-color: red;
-  display: block;
-  height: 100%;
+  @include full-width;
+  
+  box-shadow: 0px 1px 6px #000;
+  background-color: $primary-light;
+  line-height: 1.5;
   ul {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
     margin: 0;
-    padding: 15px;
+    padding: $banner-padding;
     align-items: center;
     li {
-      display: inline;
+      display: flex;
+      flex-direction: row;
       font-family: "Fira Sans", sans-serif;
       font-size: 1vw;
       justify-content: center;
       img {
-        max-height: 10vh;
+        height: $banner-height;
         width: auto;
         transition: background-color ease 250ms;
         &:hover {
           cursor: pointer;
         }
       }
-      .logoImage {
-        filter: invert(100%);
-        height: min(10vw, 150px);
+      .logo-image {
+        filter: invert(10%);
+        height: $banner-height;
         width: auto;
       }
     }
   }
 }
 
-.navBar {
-  grid-area: 🧭;
-  background-color: aquamarine;
-  display: block;
-  height: 100%;
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: calc(100% - $banner-height - $banner-padding*2);
+}
+
+$nav-background: $primary;
+.navbar {
+  background-color: $nav-background;
+  box-shadow: 0px 0px 10px $nav-background;
+  border-radius: 100vw;
+  height: 45vh;
+  padding: 2.5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 1%;
+  .nav-icon {
+    width: 40px;
+    height: auto;
+    transition: all .1s ease;
+    &:hover {
+      cursor: pointer;
+      filter: drop-shadow(0px 0px 5px $accent);
+    }
+  }
 }
 
 .page {
-  grid-area: 📰;
   background-color: yellow;
   display: block;
-  height: 100%;
 }
+
