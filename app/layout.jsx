@@ -10,9 +10,7 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
-        <React.StrictMode>
-          { children }
-        </React.StrictMode>
+        { children }
       </body>
     </html>
   )

@@ -10,10 +10,20 @@ export default function Login() {
   const passwordRef = useRef(null)
   const router = useRouter()
   
-  const validateCredidentials = async(e) => {
+  const fetchData = async() => {
+    const res = await fetch("/api/login", {
+      method: "GET",
+      cache: "no-store"
+    })
+    return res.text()
+  }
+
+  const validateCredidentials = async() => {
     // * for now, it only redirects to student console
-    console.log(">", usernameRef.current.value, passwordRef.current.value);
-    router.push("/home")
+    const res = await fetchData()
+    console.log(res);
+    // console.log(">", usernameRef.current.value, passwordRef.current.value);
+    // router.push("/home")
   }
 
 

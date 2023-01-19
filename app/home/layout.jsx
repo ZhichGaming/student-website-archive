@@ -41,11 +41,17 @@ function Navbar({ styles }) {
   const theme = "darkmode"
   return (
     <nav className={styles.navbar}>
-      <div><Image src={`/navicon/${theme}/fi-rr-home.svg`} alt="" height={50} width={50} className={styles["nav-icon"]} /></div>
-      <div><Image src={`/navicon/${theme}/fi-rr-envelope.svg`} alt="" height={50} width={50} className={styles["nav-icon"]} /></div>
-      <div><Image src={`/navicon/${theme}/fi-rr-book.svg`} alt="" height={50} width={50} className={styles["nav-icon"]} /></div>
-      <div><Image src={`/navicon/${theme}/fi-rr-grades.svg`} alt="" height={50} width={50} className={styles["nav-icon"]} /></div>
-      <div><Image src={`/navicon/${theme}/fi-rr-home.svg`} alt="" height={50} width={50} className={styles["nav-icon"]} /></div>
+      <Icon theme={theme} name={"home"} styles={styles} />
+      <Icon theme={theme} name={"envelope"} styles={styles} />
+      <Icon theme={theme} name={"book"} styles={styles} />
+      <Icon theme={theme} name={"grades"} styles={styles} />
+      <Icon theme={theme} name={"home"} styles={styles} />
     </nav>
+  )
+}
+
+function Icon({theme, name, styles}) {
+  return (
+    <div><Image src={`/navicon/${theme}/fi-rr-${name}.svg`} alt="" height={50} width={50} className={styles["nav-icon"]} /></div>
   )
 }
