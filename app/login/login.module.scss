@@ -9,125 +9,126 @@
 .session {
   position: absolute;
   font-family: "Century Gothic";
-  display:  flex; 
-  flex-direction:  row; 
-  max-width:  auto; 
-  max-height:  auto; 
+  display: flex;
+  flex-direction: row;
+  max-width: auto;
+  max-height: auto;
   left: 50%;
   top: 50%;
   translate: -50% -50%;
-  background: $primary-dark; 
+  background: $primary-dark;
   border-radius: 4px;
-  box-shadow:  5px 5px 10px -1px rgb(0,0,0);
+  box-shadow: 5px 5px 10px -1px rgb(0, 0, 0);
 }
 
 .left {
-  min-width: 220px; 
+  min-width: 220px;
   min-height: 100%;
-  position: relative; 
+  position: relative;
   background-image: url("/favicon.ico");
   filter: invert(90%);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  border-top-left-radius: 10px; 
+  border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   .image {
-    max-height:  40px; 
-    max-width:  auto; 
-    margin:  20px; 
+    max-height: 40px;
+    max-width: auto;
+    margin: 20px;
   }
 }
 
 .title {
-  font-size: 2vw; 
+  font-size: 2vw;
   font-weight: 600;
-  color: #000; 
-  opacity: .85;
+  color: #000;
+  opacity: 0.85;
   margin-bottom: 15%;
 }
 
 .inputLabel {
-  font-size: 12.5px; 
+  font-size: 12.5px;
   color: #000;
-  opacity: .8;
-  font-weight: 400; 
+  opacity: 0.8;
+  font-weight: 400;
 }
 
 $form-background: #fefefe;
 .form {
-  padding: 18% 10%; 
-  background: $form-background; 
-  display: flex; 
+  padding: 18% 10%;
+  background: $form-background;
+  display: flex;
   flex-direction: column;
-  align-items: flex-start; 
-  max-width: 40vw; 
+  align-items: flex-start;
+  max-width: 40vw;
   h4 {
     margin-bottom: 20px;
-    color: rgba(#000, .5);
+    color: rgba(#000, 0.5);
     span {
       color: rgba(#000, 1);
-      font-weight:  700; 
+      font-weight: 700;
     }
   }
 }
 
 .input {
-  font-size: 1.2vw; 
+  font-size: 1.2vw;
   padding: 12% 10%;
   max-height: 50%;
-  border: solid 1px rgba(0,0,0,0.3);
+  border: solid 1px rgba(0, 0, 0, 0.3);
   border-radius: 100vw;
-  box-sizing: border-box; 
-  transition: all .25s linear;  
+  box-sizing: border-box;
+  transition: all 0.25s linear;
   font-weight: 400;
-  -webkit-appearance: none; 
+  -webkit-appearance: none;
   appearance: none;
   max-width: calc(100% - 15%);
   margin-left: auto;
-  display: flex; 
+  display: flex;
   &:where(:focus, .input:not(:placeholder-shown)) {
-    border: solid 1px $primary; 
-    outline: 0; 
-    box-shadow: 0 2px 6px -8px rgba($primary, .45);
+    border: solid 1px $primary;
+    outline: 0;
+    box-shadow: 0 2px 6px -8px rgba($primary, 0.45);
   }
-  
 }
 
 .floatingLabel {
-  position: relative; 
+  position: relative;
   margin-bottom: 15px;
   max-width: 100%;
   label {
     font-size: 1.2vw;
-    position: absolute; 
+    position: absolute;
     top: calc(50%);
     z-index: -1;
-    left: 0; 
-    opacity: 0; 
-    transition: all .25s ease-out; 
+    left: 0;
+    opacity: 0;
+    transition: all 0.25s ease-out;
     margin-left: 20%;
     padding: 0px 10px;
     background-color: $form-background;
     border-radius: 100vw;
   }
   .icon {
-    position: absolute; 
-    top: 0px; 
-    left: -10px; 
-    max-height: 56%; 
-    max-width: 44%; 
-    display: flex; 
+    position: absolute;
+    top: 0px;
+    left: -10px;
+    max-height: 56%;
+    max-width: 44%;
+    display: flex;
     .image {
       margin-top: 10px;
-      opacity: .30; 
+      opacity: 0.3;
     }
   }
-  .input:focus, .input:not(:placeholder-shown) {
+  .input:focus,
+  .input:not(:placeholder-shown) {
     padding: 12% 10%;
   }
-  .input:focus, .input:not(:placeholder-shown) {
-    + label{
+  .input:focus,
+  .input:not(:placeholder-shown) {
+    + label {
       transform: translateY(-225%) scale(75%);
       opacity: 1;
       z-index: 1;
@@ -135,50 +136,61 @@ $form-background: #fefefe;
       box-shadow: 0px 0px $form-background;
     }
   }
-  .input:focus::placeholder{
+  .input:focus::placeholder {
     opacity: 0;
   }
   .input:not(:valid):not(:focus) + label + .icon {
     animation-name: shake-shake;
-    animation-duration: .3s;
+    animation-duration: 0.3s;
   }
 }
 
-$displacement:  3px; 
+$displacement: 3px;
 @keyframes shake-shake {
-  0% { transform: translateX(-$displacement);}
-  20% { transform: translateX($displacement);}
-  40% { transform: translateX(-$displacement);}
-  60% { transform: translateX($displacement);}  
-  80% { transform: translateX(-$displacement);}
-  100% { transform: translateX(0px);}
+  0% {
+    transform: translateX(-$displacement);
+  }
+  20% {
+    transform: translateX($displacement);
+  }
+  40% {
+    transform: translateX(-$displacement);
+  }
+  60% {
+    transform: translateX($displacement);
+  }
+  80% {
+    transform: translateX(-$displacement);
+  }
+  100% {
+    transform: translateX(0px);
+  }
 }
 
-
 .submit {
-  -webkit-appearance:  none; 
+  -webkit-appearance: none;
   appearance: none;
-  max-width:  auto;
-  min-width:  100px;
-  border-radius:  24px; 
-  text-align:  center; 
-  padding:  15px 40px;
-  margin-top:  10%; 
-  background-color:  $primary; 
-  color:  #fff; 
-  font-size:  1.1vw;
-  margin-left:  auto; 
-  font-weight:  500;
-  box-shadow:  0px 2px 6px -1px rgba(0,0,0,.13); 
-  border:  none;
+  max-width: auto;
+  min-width: 100px;
+  border-radius: 24px;
+  text-align: center;
+  padding: 15px 40px;
+  margin-top: 10%;
+  background-color: $primary;
+  color: #fff;
+  font-size: 1.1vw;
+  margin-left: auto;
+  font-weight: 500;
+  box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, 0.13);
+  border: none;
   outline: none;
-  transition: all .25s ease;
+  transition: all 0.25s ease;
   &:where(:hover, :focus) {
     transform: translateY(-3px);
     box-shadow: 0px 3px 6px -1px rgb(0, 0, 0);
     cursor: pointer;
     &:active {
-      transform:  scale(.99);
+      transform: scale(0.99);
     }
   }
 }

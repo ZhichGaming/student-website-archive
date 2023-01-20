@@ -1,42 +1,48 @@
-"use client"
+"use client";
 
-import { useRef, forwardRef } from "react"
-import { useRouter } from 'next/navigation';
-import styles from "./login.module.scss"
-import Image from "next/image"
+import { useRef, forwardRef } from "react";
+import { useRouter } from "next/navigation";
+import styles from "./login.module.scss";
+import Image from "next/image";
 
 export default function Login() {
-  const usernameRef = useRef(null)
-  const passwordRef = useRef(null)
-  const router = useRouter()
-  
-  const fetchData = async() => {
+  const usernameRef = useRef(null);
+  const passwordRef = useRef(null);
+  const router = useRouter();
+
+  const fetchData = async (username, password) => {
     const res = await fetch("/api/login", {
-      method: "GET",
-      cache: "no-store"
-    })
-    return res.text()
-  }
+      method: "POST",
+      cache: "no-store",
+      body: JSON.stringify({
+        txtCodeUsager: username, 
+        txtMotDePasse: password,
+      })
+    });
+    return res.text();
+  };
 
-  const validateCredidentials = async() => {
+  const validateCredidentials = async () => {
     // * for now, it only redirects to student console
-    const res = await fetchData()
+    const res = await fetchData(usernameRef.current.value, passwordRef.current.value);
     console.log(res);
-    // console.log(">", usernameRef.current.value, passwordRef.current.value);
     // router.push("/home")
-  }
-
+  };
 
   return (
     <>
       <LoginInput type="Username" ref={usernameRef} styles={styles} />
       <LoginInput type="Password" ref={passwordRef} styles={styles} />
-      <button type="submit" className={styles.submit} onClick={validateCredidentials}>Log in</button>
+      <button
+        type="submit"
+        className={styles.submit}
+        onClick={validateCredidentials}
+      >
+        Log in
+      </button>
     </>
-  )
+  );
 }
-
-
 
 /**
  * @param {{ type: string, reference: React useRef, styles: styles.module}} props
@@ -57,10 +63,15 @@ function LoginInput(props, ref) {
       />
       <label htmlFor={props.type}>{props.type}</label>
       <div className={props.styles.icon}>
-        <Image src={`/login/${props.type.toLowerCase()}.png`} alt="" width="30" height="30" className={props.styles.image} />
+        <Image
+          src={`/login/${props.type.toLowerCase()}.png`}
+          alt=""
+          width="30"
+          height="30"
+          className={props.styles.image}
+        />
         {/* <a href="https://www.flaticon.com/free-icons/key" title="key icons">Key icons created by Tempo_doloe - Flaticon</a> */}
       </div>
     </div>
-  )
+  );
 }
-

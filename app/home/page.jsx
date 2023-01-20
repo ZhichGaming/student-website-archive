@@ -1,13 +1,13 @@
-import { lazy, Suspense } from "react"
+import { lazy, Suspense } from "react";
 
-const Hub = lazy(() => import("./(consolepages)/Hub"))
+const Hub = lazy(() => import("./(consolepages)/Hub"));
 
 export default function HomePage() {
   return (
     <>
       <Suspense>
-        <Hub />      
+        <Hub />
       </Suspense>
     </>
-  )
+  );
 }

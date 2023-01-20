@@ -1,10 +1,10 @@
-import { redirect } from 'next/navigation';
+import { redirect } from "next/navigation";
 
 export default function Lobby() {
   const userToken = true;
   if (userToken == true) {
-    redirect("/home")
+    redirect("/home");
   } else {
-    redirect("/login")
+    redirect("/login");
   }
 }

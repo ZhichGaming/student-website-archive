@@ -1,5 +1,5 @@
-import Image from "next/image"
-import styles from "./Hub.module.scss"
+import Image from "next/image";
+import styles from "./Hub.module.scss";
 
 export default function Hub() {
   return (
@@ -8,8 +8,8 @@ export default function Hub() {
         <Profile />
       </div>
     </>
-  )
-} 
+  );
+}
 
 function Profile() {
   return (
@@ -17,5 +17,5 @@ function Profile() {
       <div></div>
       <Image src="/jdlm-logo.png" alt="" height={10} width={10} />
     </div>
-  )
+  );
 }

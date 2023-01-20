@@ -6,7 +6,7 @@ $banner-height: 75px;
 $banner-padding: 15px;
 .banner {
   @include full-width;
-  
+
   box-shadow: 0px 1px 6px #000;
   background-color: $primary-dark;
   line-height: 1.5;
@@ -45,7 +45,7 @@ $banner-padding: 15px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: calc(100% - $banner-height - $banner-padding*2);
+  height: calc(100% - $banner-height - $banner-padding * 2);
 }
 
 $nav-background: $primary;
@@ -62,7 +62,7 @@ $nav-background: $primary;
   .nav-icon {
     width: 40px;
     height: auto;
-    transition: all .1s ease;
+    transition: all 0.1s ease;
     &:hover {
       cursor: pointer;
       filter: drop-shadow(0px 0px 5px $accent);
@@ -74,4 +74,3 @@ $nav-background: $primary;
   background-color: yellow;
   display: block;
 }
-

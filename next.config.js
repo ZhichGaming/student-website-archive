@@ -2,11 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   experimental: {
-    appDir: true
+    appDir: true,
   },
   sassOptions: {
     additionalData: `@use "~/app/variables.scss" as *;`,
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
