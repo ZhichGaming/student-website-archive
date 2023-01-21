@@ -9,38 +9,7 @@ export const config = {
   },
 };
 
-async function _handler(req, res) {
-  return new Promise((resolve, reject) => {
-    proxy.on("proxyRes", (proxyRes, _req, res) => {
-      console.log("test");
-      var body = [];
-      proxyRes.on("data", (chunk) => {
-        body.push(chunk);
-      });
-      proxyRes.on("end", () => {
-        body = Buffer.concat(body).toString();
-        let re = body.match("Object moved")
-        if (re && re.length > 0) {
-          re = body.match(/"(.*?)"/g)[0].match(/[^\\"]+/)[0]
-          res.status(200).json({link: re})
-          resolve()
-        }
-        res.end("Authentification failed");
-        resolve()
-      });
-    });
-    proxy.on("error", (err, _req, _res) => {
-      res.status().send(`${err}`)
-      resolve()
-    })
-    
-    proxy.web(req, res, {
-      target: "https://portailc.jdlm.qc.ca/pednet/login.asp",
-      changeOrigin: true,
-      selfHandleResponse: true,
-    });
-  })
-}
+
 
 export default function handler(req, res) {
   console.log(req.body);
