@@ -26,9 +26,10 @@ export default function handler(req, res) {
   for (let i = 1; i <= streams.length/3; i++) {
     newBody += streams[0*i] + streams[1*i]
   }
+  newBody += form.getBoundary()
 
   proxy.on('proxyReq', (proxyReq, req, res, options) => {
-    proxyReq.write(form);
+    proxyReq.write(newBody);
   });
 
   proxy.on('proxyRes', (proxyRes, req, res) => {
@@ -40,8 +41,8 @@ export default function handler(req, res) {
       body = Buffer.concat(body).toString();
       let re = body.match("Object moved")
       if (re && re.length > 0) {
-        re = body.match(/"(.*?)"/g)[0].match(/[^\\"]+/)[0]
-        res.status(200).json({link: re})
+        // re = body.match(/"(.*?)"/g)[0].match(/[^\\"]+/)[0]
+        res.status(200).json({link: "re"})
       }
       res.status(403).send("Authentification failed");
     });
