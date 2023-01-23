@@ -12,17 +12,24 @@ export const config = {
 
 
 export default function handler(req, res) {
-  console.log(req.body);
 
-  // let form = new FormData();
-  // form.append("_Fields", "GKfUxiJY9eL6Lgw19Ck6FDm7Y0/YzI2NRYHLQ86DaVe5c1HphAvntNdDDuRQSRQEzp+SHc/RWHhLdRHrH40G2zWtZh3USNSCejNryUeDmmgaKTbZnJspNyWQGfpB8cV+Ed085A")
-  // form.append("_NoSeqWeb", "GKfUxvmW7RTHuT0EqOUjjRiS0iOvZ2NAoTgdHW+VaWhOOstziX8jYd8UWCPHgyJtT0l1s/xqR9VFRzpTkrxgP28NMPI")
-  // form.append("btnConnecter.x", 0)
-  // form.append("btnConnecter.y", 0)
-  // for (let x in req.body) {
-  //   form.append(x, req.body[x])
-  // }
-  // req.body = form
+  let form = new FormData();
+  form.append("_Fields", "GKfUxiJY9eL6Lgw19Ck6FDm7Y0/YzI2NRYHLQ86DaVe5c1HphAvntNdDDuRQSRQEzp+SHc/RWHhLdRHrH40G2zWtZh3USNSCejNryUeDmmgaKTbZnJspNyWQGfpB8cV+Ed085A")
+  form.append("_NoSeqWeb", "GKfUxvmW7RTHuT0EqOUjjRiS0iOvZ2NAoTgdHW+VaWhOOstziX8jYd8UWCPHgyJtT0l1s/xqR9VFRzpTkrxgP28NMPI")
+  form.append("btnConnecter.x", 0)
+  form.append("btnConnecter.y", 0)
+  for (let x in req.body) {
+    form.append(x, req.body[x])
+  }
+  let newBody = ""
+  const streams = form._streams
+  for (let i = 1; i <= streams.length/3; i++) {
+    newBody += streams[0*i] + streams[1*i]
+  }
+
+  proxy.on('proxyReq', (proxyReq, req, res, options) => {
+    proxyReq.write(form);
+  });
 
   proxy.on('proxyRes', (proxyRes, req, res) => {
     var body = [];
