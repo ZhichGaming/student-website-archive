@@ -1,9 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+/CLIENT/node_modules
+/SERVER/node_modules
 /.pnp
-.pnp.js
+/.pnp.js
 
 # testing
 /coverage
@@ -30,3 +31,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# deta
+/SERVER/.deta
