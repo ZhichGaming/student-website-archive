@@ -12,6 +12,8 @@ app.use('/api/login', jsonToForm)
 
 
 app.post('/api/login', (req, res) => {
+  
+  
   proxy.on('proxyRes', (proxyRes, request, response) => {
     var body = [];
     proxyRes.on('data', (chunk) => {
@@ -19,7 +21,7 @@ app.post('/api/login', (req, res) => {
     });
     proxyRes.on('end', () => {
       body = Buffer.concat(body).toString();
-      res.send("my response to cli");
+      res.send(body);
     });
   });
 
@@ -30,6 +32,8 @@ app.post('/api/login', (req, res) => {
   });
 })
 
+app.listen(3001, () => {
+  console.log("listening on port 3001...");
+})
 
-
-module.exports = app
+// module.exports = app

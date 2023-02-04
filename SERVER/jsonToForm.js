@@ -11,11 +11,25 @@ module.exports.jsonToForm =  (req, res, next) => {
   for (let x in req.body) {
     form.append(x, req.body[x]);
   }
-
-  req.body = form.getBuffer();
+  let newBody = ""
+  const streams = form._streams
+  for (let i = 0; i < streams.length/3; i++) {
+    newBody += streams[3*i] + streams[(3*i)+1] + "\r\n";
+  }
+  newBody += form.getBoundary() + "--" + "\r\n" + "";
 
   req.headers = req.headers || {}
-  req.headers = {...req.headers, ...form.getHeaders()}
 
-  next()
+  form.getLength((err, len) => {
+    if (err) {
+      this._error(err);
+      return;
+    }
+
+    req.headers["content-length"] = len
+    req.body = form.getBuffer().toString("base64");
+
+    req.headers = {...req.headers, ...form.getHeaders()}
+    next()
+  })
 }
