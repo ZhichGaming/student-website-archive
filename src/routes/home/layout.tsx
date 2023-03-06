@@ -1,5 +1,5 @@
-import { component$, Slot } from '@builder.io/qwik';
-import { loader$ } from '@builder.io/qwik-city';
+import { component$, Slot } from "@builder.io/qwik";
+import { loader$ } from "@builder.io/qwik-city";
 
 export const useServerTimeLoader = loader$(() => {
   return {
@@ -8,18 +8,14 @@ export const useServerTimeLoader = loader$(() => {
 });
 
 export default component$(() => {
-  
   return (
     <>
       <main>
-        
         <section>
           <Slot />
         </section>
       </main>
-      <footer>
-
-      </footer>
+      <footer></footer>
     </>
   );
 });

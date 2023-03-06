@@ -9,3 +9,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+}
+
+.as-1 {
+  aspect-ratio: 1;
+}
