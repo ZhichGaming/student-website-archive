@@ -1,7 +1,11 @@
 # Spacefile Docs: https://go.deta.dev/docs/spacefile/v0
 v: 0
 micros:
-  - name: backend
-    src: ./api
+  - name: jdlm-console
+    src: api
     engine: nodejs16
-    run: node index.js
+    commands:
+      - npm run build
+    include:
+      - build
+    run: "node build/index.js"
