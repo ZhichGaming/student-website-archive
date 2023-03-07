@@ -36,3 +36,9 @@ pnpm-lock.yaml
 package-lock.json
 yarn.lock
 server
+.eslintrc.cjs
+package.json
+postcss.config.js
+README.md
+tailwind.config.js
+tsconfig.json
