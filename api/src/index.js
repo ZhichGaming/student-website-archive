@@ -1,6 +1,12 @@
 const express = require("express");
 const bodyParser = require("body-parser")
+const httpProxy = require('http-proxy');
 const app = express()
+
+const proxy = httpProxy.createProxyServer({
+  target: 'https://portailc.jdlm.qc.ca/pednet/login.asp',
+  changeOrigin: true,
+});
 
 const filter = require("./filter.js")
 
@@ -8,10 +14,9 @@ const filter = require("./filter.js")
 const port = "3001"
 
 app.use(bodyParser.json())
-app.use(filter)
 
-app.post("/login", (req, res) => {
-  console.log(req.body)
+app.post("/login", filter, (req, res) => {
+  proxy.web(req, res)
 })
 
 app.listen(port, () => {
