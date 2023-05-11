@@ -1,10 +1,10 @@
 import { component$, useTask$ } from "@builder.io/qwik";
-import { useNavigate } from "@builder.io/qwik-city";
+// import { useNavigate } from "@builder.io/qwik-city";
 import type { DocumentHead } from "@builder.io/qwik-city";
 
 export default component$(() => {
-  const nav = useNavigate();
-  const user = false;
+  // const nav = useNavigate();
+  const user = null;
 
   useTask$(() => {
     console.log(">>", user);
@@ -29,3 +29,4 @@ export const head: DocumentHead = {
     },
   ],
 };
+
