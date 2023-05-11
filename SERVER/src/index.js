@@ -1,10 +1,12 @@
-const { WebSocketServer } = require("ws");
 const port = process.env.PORT ?? 8080;
-const server = new WebSocketServer({ port });
+const io = require("socket.io")(port, {
+  cors: ["http://localhost:5173"],
+});
 
 server.on("connection", (socket) => {
+  console.log(`>> Connected to ${socket.id}`);
   socket.on("message", (message) => {
-    socket.send(`${message}`);
+    socket.send();
   });
 });
 

@@ -1,9 +1,12 @@
-import { component$, useSignal } from "@builder.io/qwik";
-import type { Signal } from "@builder.io/qwik"
+import { component$, useContext, useSignal } from "@builder.io/qwik";
+import type { Signal } from "@builder.io/qwik";
+import { SocketCtx } from "../layout";
+
+export const socket = useContext(SocketCtx);
 
 export default component$(() => {
-  const usernameRef = useSignal<Element>()
-  const passwordRef = useSignal<Element>()
+  const usernameRef = useSignal<HTMLInputElement>();
+  const passwordRef = useSignal<HTMLInputElement>();
 
   return (
     <div class="flex-1 dark:bg-black center w-auto h-1/2 as-1">
@@ -16,51 +19,37 @@ export default component$(() => {
   );
 });
 
-export function submitLogin(usernameRef: Element | undefined, passwordRef: Element | undefined) {
+export function submitLogin(usernameRef: HTMLInputElement | undefined, passwordRef: HTMLInputElement | undefined) {
   console.log(usernameRef?.value, passwordRef?.value);
-  
+  socket.emit("signin", { username: usernameRef?.value, password: passwordRef?.value });
 }
 
 export const SubmitButton = component$((props: ButtonProps) => {
   return (
-    <button
-      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-      onClick$={() => submitLogin(props.usernameRef.value, props.passwordRef.value)}
-    >
+    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick$={() => submitLogin(props.usernameRef.value, props.passwordRef.value)}>
       Submit
     </button>
-  )
-})
+  );
+});
 
 export const FormInput = component$((props: InputProps) => {
   return (
     <div class="relative z-0 w-full mb-6 group">
-      <input
-        type={`${props.name == "password" ? "password": "text"}`}
-        name={props.name}
-        id={`floating_${props.name}`}
-        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-2 border-gray-300 rounded-full appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer pl-4 hover:cursor-text"
-        placeholder=" "
-        autoComplete="off"
-        ref={props.ref}
-        required
-      />
-      <label
-        for={`floating_${props.name}`}
-        class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 translate-x-5 peer-focus:scale-75 peer-focus:-translate-y-5 dark:bg-black px-1 rounded-full hover:cursor-text"
-      >
+      <input type={`${props.name == "password" ? "password" : "text"}`} name={props.name} id={`floating_${props.name}`} class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-2 border-gray-300 rounded-full appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer pl-4 hover:cursor-text" placeholder=" " autoComplete="off" ref={props.ref} required />
+      <label for={`floating_${props.name}`} class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 translate-x-5 peer-focus:scale-75 peer-focus:-translate-y-5 dark:bg-black px-1 rounded-full hover:cursor-text">
         {props.name}
       </label>
     </div>
-  )
-})
+  );
+});
 
 interface InputProps {
-  name: string,
-  ref: Signal<Element | undefined>,
+  name: string;
+  ref: Signal<HTMLInputElement | undefined>;
 }
 
 interface ButtonProps {
-  usernameRef: Signal<Element | undefined>,
-  passwordRef: Signal<Element | undefined>,
+  usernameRef: Signal<HTMLInputElement | undefined>;
+  passwordRef: Signal<HTMLInputElement | undefined>;
 }
+
