@@ -1,12 +1,11 @@
 import { component$, useContext, useSignal } from "@builder.io/qwik";
 import type { Signal } from "@builder.io/qwik";
+import type { Socket } from "socket.io-client";
 import { SocketCtx } from "../layout";
 
-export const socket = useContext(SocketCtx);
-
 export default component$(() => {
-  const usernameRef = useSignal<HTMLInputElement>();
-  const passwordRef = useSignal<HTMLInputElement>();
+  const usernameRef = useSignal<Element>();
+  const passwordRef = useSignal<Element>();
 
   return (
     <div class="flex-1 dark:bg-black center w-auto h-1/2 as-1">
@@ -19,14 +18,15 @@ export default component$(() => {
   );
 });
 
-export function submitLogin(usernameRef: HTMLInputElement | undefined, passwordRef: HTMLInputElement | undefined) {
+export function submitLogin(socket: Socket, usernameRef: Element | undefined, passwordRef: Element | undefined) {
   console.log(usernameRef?.value, passwordRef?.value);
-  socket.emit("signin", { username: usernameRef?.value, password: passwordRef?.value });
+  socket!.emit("login", { username: usernameRef?.value, password: passwordRef?.value });
 }
 
 export const SubmitButton = component$((props: ButtonProps) => {
+  const socket = useContext(SocketCtx);
   return (
-    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick$={() => submitLogin(props.usernameRef.value, props.passwordRef.value)}>
+    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick$={() => submitLogin(socket, props.usernameRef.value, props.passwordRef.value)}>
       Submit
     </button>
   );
@@ -45,11 +45,10 @@ export const FormInput = component$((props: InputProps) => {
 
 interface InputProps {
   name: string;
-  ref: Signal<HTMLInputElement | undefined>;
+  ref: Signal<Element | undefined>;
 }
 
 interface ButtonProps {
-  usernameRef: Signal<HTMLInputElement | undefined>;
-  passwordRef: Signal<HTMLInputElement | undefined>;
+  usernameRef: Signal<Element | undefined>;
+  passwordRef: Signal<Element | undefined>;
 }
-

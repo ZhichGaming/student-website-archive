@@ -1,4 +1,4 @@
-import { Slot, component$, createContextId, useContextProvider, useStore } from "@builder.io/qwik";
+import { Slot, component$, createContextId, noSerialize, useContextProvider, useStore } from "@builder.io/qwik";
 import type { Signal } from "@builder.io/qwik";
 
 import { io } from "socket.io-client";
@@ -13,17 +13,22 @@ type User = {
 };
 
 export default component$(() => {
+  let local;
+  if (typeof window !== "undefined") {
+    local = localStorage.user;
+  }
+
   const user = useStore(
-    localStorage.user ?? {
+    local ?? {
       username: null,
       password: null,
     }
   );
 
-  const socket = io("http://localhost:8080");
+  const socket = noSerialize(io("http://localhost:8080"));
 
   useContextProvider(UserCtx, user);
-  useContextProvider(SocketCtx, socket);
+  useContextProvider(SocketCtx, socket as Object);
 
   return (
     <>
@@ -31,4 +36,3 @@ export default component$(() => {
     </>
   );
 });
-
