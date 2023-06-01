@@ -9,7 +9,7 @@ const io = require("socket.io")(port, {
 });
 
 io.on("connection", async (socket) => {
-  if (!socket.handshake.headers.origin) return;
+  if (!socket.handshake.headers.host) return;
   const browser = await puppeteer.launch({ headless: false, slowMo: 10 });
   const page = await createPage(browser, "https://portailc.jdlm.qc.ca/pednet/login.asp");
 

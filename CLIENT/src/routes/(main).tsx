@@ -1,5 +1,5 @@
 import { redirect } from "solid-start/server";
-import { userInfo } from "./store";
+import { userInfo } from "../components/store";
 
 export function GET() {
   const [user, setUser] = userInfo;
@@ -19,4 +19,3 @@ export const head = {
     },
   ],
 };
-
