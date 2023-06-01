@@ -1,12 +1,11 @@
 import { type Socket } from "socket.io-client";
 import { type Setter, createSignal, useContext, type Accessor, createEffect } from "solid-js";
-// import { socket } from "../store";
+
+import useSocket from "~/_socket";
 
 export default function Login() {
   const [usernameRef, setUsernameRef] = createSignal<Element>();
   const [passwordRef, setPasswordRef] = createSignal<Element>();
-
-  createEffect(() => {});
 
   return (
     <div class="flex-1 dark:bg-black center w-auto h-1/2 as-1">
@@ -24,11 +23,12 @@ function submitLogin(socket: Socket, username: string, password: string) {
 }
 
 function SubmitButton({ usernameRef, passwordRef }: ButtonProps) {
+  let socket = useSocket();
+
   return (
-    // <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={() => submitLogin(socket, usernameRef()?.value, passwordRef()?.value)}>
-    //   Submit
-    // </button>
-    <div></div>
+    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={() => submitLogin(socket(), usernameRef()?.value, passwordRef()?.value)}>
+      Submit
+    </button>
   );
 }
 
@@ -52,3 +52,4 @@ interface ButtonProps {
   usernameRef: Accessor<Element | undefined>;
   passwordRef: Accessor<Element | undefined>;
 }
+

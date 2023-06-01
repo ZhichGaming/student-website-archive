@@ -17,7 +17,8 @@ io.on("connection", async (socket) => {
     await page.type("#txtCodeUsager", username);
     await page.type("#txtMotDePasse", password);
     await page.click("#btnConnecter");
-    await page.$("body#logbody");
+    await page.waitForSelector("center");
+    await page.$$eval("center", (items) => {});
   });
 
   socket.on("disconnect", () => {
