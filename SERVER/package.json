@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "puppeteer": "^20.2.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "random-useragent": "^0.5.0",
+    "socket.io": "^4.6.1"
+  },
+  "scripts": {
+    "dev": "clear && nodemon ./src/index.js"
+  }
+}
