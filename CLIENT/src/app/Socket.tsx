@@ -1,3 +1,5 @@
+"use client";
+
 import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 import { type Socket, io } from "socket.io-client";
 
@@ -8,7 +10,11 @@ function SocketContextProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     setSocket(io("http://localhost:8000"));
-  }, []);
+
+    return () => {
+      socket?.disconnect();
+    };
+  }, [socket]);
 
   return <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>;
 }
