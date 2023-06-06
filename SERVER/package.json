@@ -7,6 +7,6 @@
     "socket.io": "^4.6.1"
   },
   "scripts": {
-    "dev": "clear && nodemon ./src/index.js"
+    "dev": "(cls||clear) && nodemon ./src/index.js"
   }
 }
