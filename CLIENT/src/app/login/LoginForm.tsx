@@ -46,7 +46,8 @@ function LoginButton({ refs }: Props) {
         className="bg-blue-500 text-white rounded-md px-2 py-1"
         onClick={(e) => {
           handleSubmit(e);
-        }}>
+        }}
+      >
         Submit
       </button>
     </div>
@@ -56,3 +57,4 @@ function LoginButton({ refs }: Props) {
 type Props = {
   refs: MutableRefObject<null>[];
 };
+

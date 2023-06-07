@@ -1,18 +1,29 @@
 "use client";
 
-import { type MutableRefObject, ReactNode, createContext, useContext, useRef } from "react";
+import { ReactNode, createContext, useContext, useEffect } from "react";
 import { type Socket, io } from "socket.io-client";
 
-const SocketContext = createContext<MutableRefObject<Socket> | undefined>(undefined);
+const SocketContext = createContext<Socket | null>(null);
+let socket: Socket;
 
 function SocketContextProvider({ children }: { children: ReactNode }) {
-  const socket = useRef(io("http://localhost:8000"));
+  useEffect(() => {
+    socketInitializer();
+  });
 
+  const socketInitializer = async () => {
+    socket = io("http://localhost:8000");
+
+    socket.on("connect", () => {
+      console.log("connected");
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  };
   return <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>;
 }
 
-function UseSocket() {
-  return useContext(SocketContext);
-}
+function UseSocket() {}
 
-export { SocketContextProvider, UseSocket };
