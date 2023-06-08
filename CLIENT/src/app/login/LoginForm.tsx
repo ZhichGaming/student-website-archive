@@ -1,11 +1,27 @@
 "use client";
 
-import type { MutableRefObject } from "react";
-import { useRef } from "react";
+import type { Dispatch, MutableRefObject, SetStateAction } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useUser } from "../useUser";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
+  const errorRef = useRef(null);
+  const [failed, setFailed] = useState("");
+
+  useEffect(() => {
+    if (failed == "" || failed == "connected") {
+      errorRef!.current!.classList.add("invisible");
+      return;
+    } else if (failed == "password") {
+      errorRef!.current!.innerText = "Usager et / ou mot de passe invalide";
+    } else if (failed == "server") {
+      errorRef!.current!.innerText = "Le serveur ne fonctionne pas pour l'instant";
+    }
+    errorRef!.current!.classList.remove("invisible");
+  }, [failed]);
 
   return (
     <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
@@ -21,43 +37,54 @@ export default function LoginForm() {
           Password
         </label>
       </div>
-      <LoginButton refs={[usernameRef, passwordRef]} />
+      <Error errorRef={errorRef} />
+      <LoginButton refs={[usernameRef, passwordRef]} setFailed={setFailed} />
     </div>
   );
 }
 
-function LoginButton({ refs }: Props) {
+function LoginButton({ refs, setFailed }: Props) {
   const [usernameRef, passwordRef] = refs;
+  const [, { login }] = useUser();
+  const router = useRouter();
 
-  const handleSubmit = async (e: any) => {
+  async function handleSubmit(e: any) {
+    setFailed("");
     e.preventDefault();
 
-    let res = await fetch("//localhost:8000/login", {
-      method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username: (usernameRef!.current! as HTMLInputElement).value, password: (passwordRef!.current! as HTMLInputElement).value }),
-    });
-    let data = await res.json();
-    console.log(data);
-  };
+    let res = await login((usernameRef!.current! as HTMLInputElement).value, (passwordRef!.current! as HTMLInputElement).value);
+
+    if (res == "connected") {
+      router.push("/");
+      return;
+    }
+    setFailed(res);
+  }
 
   return (
     <div className="relative">
       <button
-        className="bg-blue-500 text-white rounded-md px-2 py-1"
+        className="bg-blue-500 text-white text-sm rounded-md px-4 py-2 hover:bg-emerald-400 focus:bg-emerald-400 transition-colors outline-none"
         onClick={(e) => {
           handleSubmit(e);
-        }}>
+        }}
+      >
         Submit
       </button>
     </div>
   );
 }
 
+function Error({ errorRef }: { errorRef: MutableRefObject<null> }) {
+  return (
+    <p className="text-red-500 text-sm invisible w-[15rem]" ref={errorRef}>
+      Le serveur ne fonctionne pas pour l&#39;instant
+    </p>
+  );
+}
+
 type Props = {
   refs: MutableRefObject<null>[];
+  setFailed: Dispatch<SetStateAction<string>>;
 };
+

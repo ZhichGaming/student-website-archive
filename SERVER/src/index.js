@@ -14,14 +14,22 @@ app.use(bodyParser.json());
 let page;
 
 app.post("/login", async (req, res) => {
-  const browser = await puppeteer.launch({ headless: false, slowMo: 10 });
-  page = await createPage(browser, "https://portailc.jdlm.qc.ca/pednet/login.asp");
+  if (!page) {
+    const browser = await puppeteer.launch({ headless: false, slowMo: 10 });
+    page = await createPage(browser, "https://portailc.jdlm.qc.ca/pednet/login.asp");
+  }
 
   const { username, password } = req.body;
 
   await page.type("#txtCodeUsager", username);
   await page.type("#txtMotDePasse", password);
   await page.click("#btnConnecter");
+
+  let changed = await page.$(".logbody");
+  if (changed != null) {
+    return res.status(401).send("failed");
+  }
+
   await page.waitForSelector("center");
   let t = await page.$eval("center", (el) => el.innerText);
 
@@ -40,3 +48,4 @@ app.post("/login", async (req, res) => {
 app.listen(port, () => {
   console.log(`listening on port ${port}`);
 });
+
