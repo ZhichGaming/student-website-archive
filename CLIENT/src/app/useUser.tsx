@@ -3,7 +3,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode, Dispatch } from "react";
 
-const UserContext = createContext<[User, { login: (username: string, password: string) => Promise<boolean> }] | null>(null);
+const UserContext = createContext<[User, { login: (username: string, password: string) => Promise<string> }] | null>(null);
 
 function UserContextProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -25,16 +25,16 @@ function UserContextProvider({ children }: { children: ReactNode }) {
         body: JSON.stringify({ username, password }),
       });
 
-      if ((await res.status) == 401) {
-        return false;
+      if (res.status == 401) {
+        return "password";
       }
 
       let data = await res.json();
       setUser(data);
 
-      return true;
+      return "connected";
     } catch {
-      return false;
+      return "server";
     }
   }
 

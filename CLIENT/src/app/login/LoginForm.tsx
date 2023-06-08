@@ -9,14 +9,18 @@ export default function LoginForm() {
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
   const errorRef = useRef(null);
-  const [failed, setFailed] = useState(false);
+  const [failed, setFailed] = useState("");
 
   useEffect(() => {
-    if (failed) {
-      errorRef?.current?.classList.remove("invisible");
+    if (failed == "" || failed == "connected") {
+      errorRef!.current!.classList.add("invisible");
       return;
+    } else if (failed == "password") {
+      errorRef!.current!.innerText = "Usager et / ou mot de passe invalide";
+    } else if (failed == "server") {
+      errorRef!.current!.innerText = "Le serveur ne fonctionne pas pour l'instant";
     }
-    errorRef?.current?.classList.add("invisible");
+    errorRef!.current!.classList.remove("invisible");
   }, [failed]);
 
   return (
@@ -45,17 +49,16 @@ function LoginButton({ refs, setFailed }: Props) {
   const router = useRouter();
 
   async function handleSubmit(e: any) {
-    setFailed(false);
+    setFailed("");
     e.preventDefault();
 
     let res = await login((usernameRef!.current! as HTMLInputElement).value, (passwordRef!.current! as HTMLInputElement).value);
-    console.log(res);
 
-    if (res) {
+    if (res == "connected") {
       router.push("/");
       return;
     }
-    setFailed(true);
+    setFailed(res);
   }
 
   return (
@@ -74,14 +77,14 @@ function LoginButton({ refs, setFailed }: Props) {
 
 function Error({ errorRef }: { errorRef: MutableRefObject<null> }) {
   return (
-    <p className="text-red-500 text-sm invisible" ref={errorRef}>
-      Usager et / ou mot de passe invalide
+    <p className="text-red-500 text-sm invisible w-[15rem]" ref={errorRef}>
+      Le serveur ne fonctionne pas pour l&#39;instant
     </p>
   );
 }
 
 type Props = {
   refs: MutableRefObject<null>[];
-  setFailed: Dispatch<SetStateAction<boolean>>;
+  setFailed: Dispatch<SetStateAction<string>>;
 };
 
