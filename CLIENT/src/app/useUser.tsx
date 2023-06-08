@@ -14,19 +14,28 @@ function UserContextProvider({ children }: { children: ReactNode }) {
   }, [user]);
 
   async function login(username: string, password: string) {
-    let res = await fetch("//localhost:8000/login", {
-      method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    });
-    let data = await res.json();
-    setUser(data);
+    try {
+      let res = await fetch("//localhost:8000/login", {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
 
-    return true;
+      if ((await res.status) == 401) {
+        return false;
+      }
+
+      let data = await res.json();
+      setUser(data);
+
+      return true;
+    } catch {
+      return false;
+    }
   }
 
   return <UserContext.Provider value={[user, { login }]}>{children}</UserContext.Provider>;
