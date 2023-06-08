@@ -29,9 +29,10 @@ export default function LoginForm() {
 function LoginButton({ refs }: Props) {
   const [usernameRef, passwordRef] = refs;
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    fetch("//localhost:8000/login", {
+
+    let res = await fetch("//localhost:8000/login", {
       method: "POST",
       mode: "cors",
       cache: "no-cache",
@@ -40,6 +41,8 @@ function LoginButton({ refs }: Props) {
       },
       body: JSON.stringify({ username: (usernameRef!.current! as HTMLInputElement).value, password: (passwordRef!.current! as HTMLInputElement).value }),
     });
+    let data = await res.json();
+    console.log(data);
   };
 
   return (
@@ -48,8 +51,7 @@ function LoginButton({ refs }: Props) {
         className="bg-blue-500 text-white rounded-md px-2 py-1"
         onClick={(e) => {
           handleSubmit(e);
-        }}
-      >
+        }}>
         Submit
       </button>
     </div>
@@ -59,4 +61,3 @@ function LoginButton({ refs }: Props) {
 type Props = {
   refs: MutableRefObject<null>[];
 };
-
