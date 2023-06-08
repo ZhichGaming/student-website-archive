@@ -1,28 +1,24 @@
-export default function LoginPage() {
-  return <Form />;
-}
+import LoginForm from "./LoginForm";
 
-function Form() {
+export default function LoginPage() {
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-      <div className="mb-4">
-        <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
-          Name
-        </label>
-        <input type="text" id="name" name="name" className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
+    <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+      <div className="relative py-3 sm:max-w-xl sm:mx-auto">
+        {/* Blue background */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
+        <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+          <div className="max-w-md mx-auto">
+            <div>
+              <h1 className="text-2xl font-semibold">Connection</h1>
+            </div>
+            <div className="divide-y divide-gray-200">
+              <LoginForm />
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="mb-4">
-        <label htmlFor="email" className="block text-gray-700 font-bold mb-2">
-          Email
-        </label>
-        <input type="email" id="email" name="email" className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
-      </div>
-      <div className="flex items-center justify-center">
-        <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-          Submit
-        </button>
-      </div>
-    </form>
+    </div>
   );
 }
 
+// form from Adityacs001
