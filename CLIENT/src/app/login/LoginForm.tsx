@@ -1,8 +1,7 @@
 "use client";
 
 import type { MutableRefObject } from "react";
-import { UseSocket } from "../Socket";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 export default function LoginForm() {
   const usernameRef = useRef(null);
@@ -29,15 +28,18 @@ export default function LoginForm() {
 
 function LoginButton({ refs }: Props) {
   const [usernameRef, passwordRef] = refs;
-  const socket = UseSocket();
-
-  useEffect(() => {
-    console.log(socket);
-  });
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log(usernameRef, passwordRef);
+    fetch("//localhost:8000/login", {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username: (usernameRef!.current! as HTMLInputElement).value, password: (passwordRef!.current! as HTMLInputElement).value }),
+    });
   };
 
   return (
