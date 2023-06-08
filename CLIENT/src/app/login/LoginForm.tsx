@@ -2,6 +2,8 @@
 
 import type { MutableRefObject } from "react";
 import { useRef } from "react";
+import { useUser } from "../useUser";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
   const usernameRef = useRef(null);
@@ -28,21 +30,17 @@ export default function LoginForm() {
 
 function LoginButton({ refs }: Props) {
   const [usernameRef, passwordRef] = refs;
+  const [, { login }] = useUser();
+  const router = useRouter();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    let res = await fetch("//localhost:8000/login", {
-      method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username: (usernameRef!.current! as HTMLInputElement).value, password: (passwordRef!.current! as HTMLInputElement).value }),
-    });
-    let data = await res.json();
-    console.log(data);
+    let res = await login((usernameRef!.current! as HTMLInputElement).value, (passwordRef!.current! as HTMLInputElement).value);
+
+    if (res) {
+      router.push("/");
+    }
   };
 
   return (
@@ -51,7 +49,8 @@ function LoginButton({ refs }: Props) {
         className="bg-blue-500 text-white rounded-md px-2 py-1"
         onClick={(e) => {
           handleSubmit(e);
-        }}>
+        }}
+      >
         Submit
       </button>
     </div>
@@ -61,3 +60,4 @@ function LoginButton({ refs }: Props) {
 type Props = {
   refs: MutableRefObject<null>[];
 };
+
