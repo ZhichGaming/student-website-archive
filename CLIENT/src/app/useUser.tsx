@@ -9,8 +9,12 @@ function UserContextProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    let sUser = localStorage.getItem("user") as unknown as User;
-    if (sUser) setUser(sUser);
+    let sUser = localStorage.getItem("user");
+    if (sUser) setUser(JSON.parse(sUser));
+  }, [user]);
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 
   async function login(username: string, password: string) {
@@ -30,7 +34,7 @@ function UserContextProvider({ children }: { children: ReactNode }) {
       }
 
       let data = await res.json();
-      setUser(data);
+      setUser({ ...data, username, password });
 
       return "connected";
     } catch {
@@ -54,4 +58,3 @@ type User = {
 };
 
 export { UserContextProvider, useUser };
-

@@ -1,7 +1,7 @@
 "use client";
 
 import type { Dispatch, MutableRefObject, SetStateAction } from "react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useUser } from "../useUser";
 import { useRouter } from "next/navigation";
 
@@ -49,13 +49,14 @@ function LoginButton({ refs, setFailed }: Props) {
   const router = useRouter();
 
   async function handleSubmit(e: any) {
-    setFailed("");
     e.preventDefault();
+    let [username, password] = [(usernameRef!.current! as HTMLInputElement).value, (passwordRef!.current! as HTMLInputElement).value];
+    setFailed("");
 
-    let res = await login((usernameRef!.current! as HTMLInputElement).value, (passwordRef!.current! as HTMLInputElement).value);
+    let res = await login(username, password);
 
     if (res == "connected") {
-      router.push("/");
+      router.push("/home");
       return;
     }
     setFailed(res);
@@ -67,8 +68,7 @@ function LoginButton({ refs, setFailed }: Props) {
         className="bg-blue-500 text-white text-sm rounded-md px-4 py-2 hover:bg-emerald-400 focus:bg-emerald-400 transition-colors outline-none"
         onClick={(e) => {
           handleSubmit(e);
-        }}
-      >
+        }}>
         Submit
       </button>
     </div>
@@ -87,4 +87,3 @@ type Props = {
   refs: MutableRefObject<null>[];
   setFailed: Dispatch<SetStateAction<string>>;
 };
-
