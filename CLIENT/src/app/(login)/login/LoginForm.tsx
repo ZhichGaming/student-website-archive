@@ -2,7 +2,7 @@
 
 import type { Dispatch, MutableRefObject, SetStateAction } from "react";
 import { useEffect, useRef, useState } from "react";
-import { useUser } from "../useUser";
+import { useUser } from "../../useUser";
 import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
