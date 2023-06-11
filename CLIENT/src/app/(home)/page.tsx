@@ -14,7 +14,7 @@ export default function Home() {
 
     <div className="flex-grow">
       <div className="p-12 flex flex-col h-full space-y-6 mb-6">
-        <div className="flex space-x-6 flex-grow">
+        <div className="flex space-x-6">
           <GeneralCard />
           <div className="flex flex-col w-5/12 space-y-6 flex-grow">
             <EventsCard />
