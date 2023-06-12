@@ -1,5 +1,5 @@
-import "./globals.css";
-import "@fortawesome/fontawesome-free/css/all.css";
+import "./_globalCss/globals.css";
+import "./_globalCss/all.min.css";
 import { Inter } from "next/font/google";
 import { UserContextProvider } from "./useUser";
 
