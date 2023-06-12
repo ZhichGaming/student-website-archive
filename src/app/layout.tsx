@@ -1,4 +1,5 @@
-import "./globals.css";
+import "./_globalCss/globals.css";
+import "./__globalCss/all.min.css";
 import { Inter } from "next/font/google";
 import { UserContextProvider } from "./useUser";
 
@@ -18,4 +19,3 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
-

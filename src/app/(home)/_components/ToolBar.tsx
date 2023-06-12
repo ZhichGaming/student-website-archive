@@ -48,4 +48,3 @@ function ToolbarLink({ url, label }: { url: string; label: string }) {
     </Link>
   );
 }
-
