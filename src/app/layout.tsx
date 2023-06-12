@@ -1,5 +1,5 @@
 import "./_globalCss/globals.css";
-import "./__globalCss/all.min.css";
+import "./_globalCss/all.min.css";
 import { Inter } from "next/font/google";
 import { UserContextProvider } from "./useUser";
 
