@@ -2,7 +2,6 @@
 
 import type { Dispatch, MutableRefObject, SetStateAction } from "react";
 import { useEffect, useRef, useState } from "react";
-import { useUser } from "../../useUser";
 import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
@@ -56,7 +55,7 @@ function LoginButton({ refs, setFailed }: Props) {
     let res = await login(username, password);
 
     if (res == "connected") {
-      router.push("/home");
+      router.push("/");
       return;
     }
     setFailed(res);
@@ -68,7 +67,8 @@ function LoginButton({ refs, setFailed }: Props) {
         className="bg-blue-500 text-white text-sm rounded-md px-4 py-2 hover:bg-emerald-400 focus:bg-emerald-400 transition-colors outline-none"
         onClick={(e) => {
           handleSubmit(e);
-        }}>
+        }}
+      >
         Submit
       </button>
     </div>
@@ -87,3 +87,4 @@ type Props = {
   refs: MutableRefObject<null>[];
   setFailed: Dispatch<SetStateAction<string>>;
 };
+

@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
   const res = await fetch("https://portailc.jdlm.qc.ca/pednet/mobile/api/informations", {
     method: "GET",
-    
+
     mode: "cors",
     cache: "no-cache",
     headers: {
@@ -30,3 +30,4 @@ export async function POST(request: NextRequest) {
   const data = await res.json();
   return NextResponse.json(data["access_token"]);
 }
+
