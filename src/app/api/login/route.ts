@@ -1,7 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export function GET(request: NextRequest) {
-  return NextResponse.json({ get: "got" });
+export async function GET(request: NextRequest) {
+  const res = await fetch("https://portailc.jdlm.qc.ca/pednet/mobile/api/informations", {
+    method: "GET",
+    mode: "cors",
+    cache: "no-cache",
+    headers: request.headers,
+  });
+  const data = await res.json();
+  return NextResponse.json(data);
 }
 
 export async function POST(request: NextRequest) {
@@ -18,5 +25,5 @@ export async function POST(request: NextRequest) {
     body: new URLSearchParams(Object.entries(body)).toString(),
   });
   const data = await res.json();
-  return NextResponse.json(data);
+  return NextResponse.json(data["access_token"]);
 }
