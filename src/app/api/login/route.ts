@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
+  console.log(request.headers);
+  
+
   const res = await fetch("https://portailc.jdlm.qc.ca/pednet/mobile/api/informations", {
     method: "GET",
     mode: "cors",
