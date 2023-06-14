@@ -9,7 +9,6 @@ import Logo from "../../assets/light-logo.png";
 export default function Toolbar() {
   return (
     <div className="toolbar w-full h-16 px-5 top-0 z-50 flex items-center justify-center bg-white">
-      {/* Bro I tried everything I can't get local images to work in assets folder... */}
       <Image src={Logo} className="toolbar-logo mr-auto h-8 aspect-square w-auto" alt="" />
 
       <div className="toolbar-buttons-group">
@@ -20,7 +19,7 @@ export default function Toolbar() {
 
       <div className="toolbar-profile-group flex items-center ml-auto">
         <p>Your Name</p>
-        <Image src="https://64.media.tumblr.com/ef4fdf8138e198106cc18fcc5300c1cb/d0bb637b9240f4c1-6f/s1280x1920/2e5dc11ff1e3b7955214477f422fdaec409c9cbc.jpg" alt="Profile picture" className="toolbar-pfp w-12 h-12 object-cover rounded-full ml-2" width={258} height={258} />
+        <Image src="" alt="Profile picture" className="toolbar-pfp w-12 h-12 object-cover rounded-full ml-2" width={258} height={258} />
       </div>
     </div>
   );
@@ -48,3 +47,4 @@ function ToolbarLink({ url, label }: { url: string; label: string }) {
     </Link>
   );
 }
+

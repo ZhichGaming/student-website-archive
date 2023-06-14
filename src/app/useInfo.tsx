@@ -14,6 +14,22 @@ function InfoContextProvider({ children }: { children: ReactNode }) {
     localStorage.setItem("token", token);
   }, [token]);
 
+  const getInfo = async (tokenData: string) => {
+    let infoRes = await fetch("/api/login", {
+      method: "GET",
+      mode: "cors",
+      cache: "no-cache",
+      headers: {
+        authorization: "Bearer " + tokenData,
+      },
+    });
+
+    let infoData = await infoRes.json();
+    setInfo(infoData);
+
+    return "connected";
+  };
+
   const login = async (username: string, password: string) => {
     try {
       let tokenRes = await fetch("/api/login", {
@@ -34,19 +50,7 @@ function InfoContextProvider({ children }: { children: ReactNode }) {
 
       setToken(tokenData);
 
-      let infoRes = await fetch("/api/login", {
-        method: "GET",
-        mode: "cors",
-        cache: "no-cache",
-        headers: {
-          authorization: "Bearer " + tokenData,
-        },
-      });
-
-      let infoData = await infoRes.json();
-      setInfo(infoData);
-
-      return "connected";
+      return getInfo(tokenData);
     } catch {
       return "server";
     }
@@ -62,3 +66,4 @@ function useInfo() {
 export { InfoContextProvider, useInfo };
 
 type User = [any, { login: (username: string, password: string) => Promise<string> }];
+

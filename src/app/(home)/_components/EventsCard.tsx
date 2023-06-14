@@ -4,11 +4,12 @@ export default function EventsCard() {
       <p className="text-lg opacity-50 mb-2">
         <b>Upcoming Events</b>
       </p>
-      <div className="">
-        <p>Science Exam</p>
-        {/* For some reason, this text goes up when I try to put these two on a same line using flex. Very weird. */}
-        <p className="text-sm opacity-50">In 4 days</p>
+      <div>
+        <p className="text-lg">
+          Science Exam <span className="text-[0.75rem] text-sm opacity-50">In 4 days</span>
+        </p>
       </div>
     </div>
   );
 }
+

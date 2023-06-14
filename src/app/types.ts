@@ -1,5 +1,3 @@
-type Token = string;
-
 type Info = {
   id: string;
   info: UserInfo;
@@ -8,8 +6,10 @@ type Info = {
 
 type UserInfo = {
   name: string;
+  firstname: string;
   permcode: string;
   group: string;
+  enriched: string;
   locker: string;
 };
 
@@ -37,5 +37,5 @@ type GradeExam = {
   average: number;
 };
 
-export type { Token, Info, Grades, UserInfo, InfoImg, GradeCompetency, GradeExam };
+export type { Info, Grades, UserInfo, InfoImg, GradeCompetency, GradeExam };
 

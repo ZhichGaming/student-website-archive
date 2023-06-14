@@ -4,10 +4,11 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "64.media.tumblr.com",
+        hostname: "portailc.jdlm.qc.ca",
       },
     ],
   },
 };
 
 module.exports = nextConfig;
+
