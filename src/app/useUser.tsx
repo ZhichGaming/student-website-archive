@@ -1,60 +1,56 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import type { ReactNode, Dispatch } from "react";
+import type { ReactNode } from "react";
+import type { Info } from "./types";
 
-const UserContext = createContext<[User, { login: (username: string, password: string) => Promise<string> }] | null>(null);
+const userContext = createContext<User>(null);
 
 function UserContextProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState<string>(null);
+  const [info, setInfo] = useState<Info>(null);
 
   useEffect(() => {
-    let sUser = localStorage.getItem("user");
-    if (sUser) setUser(JSON.parse(sUser));
-  }, [user]);
-
-  useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(user));
-  }, [user]);
+    localStorage.setItem("token", token);
+  }, [token]);
 
   async function login(username: string, password: string) {
-    try {
-      let res = await fetch("//localhost:8000/login", {
-        method: "POST",
-        mode: "cors",
-        cache: "no-cache",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      });
+    let tokenRes = await fetch("/api/login", {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    });
 
-      if (res.status == 401) {
-        return "password";
-      }
+    let tokenData = await tokenRes.json();
+    setToken(tokenData);
 
-      let data = await res.json();
-      setUser({ ...data, username, password });
+    let infoRes = await fetch("/api/login", {
+      method: "GET",
+      mode: "cors",
+      cache: "no-cache",
+      headers: {
+        authorization: "Bearer " + token,
+      },
+    });
 
-      return "connected";
-    } catch {
-      return "server";
-    }
+    let infoData = await infoRes.json();
+    setInfo(infoData);
+
+    console.log(info);
   }
 
-  return <UserContext.Provider value={[user, { login }]}>{children}</UserContext.Provider>;
+  return <userContext.Provider value={[info, { login }]}></userContext.Provider>;
 }
 
 function useUser() {
-  return useContext(UserContext);
+  return useContext(userContext);
 }
 
-type User = {
-  name: string;
-  id: string;
-  group: string;
-  locker: string;
-  permcode: string;
-};
-
 export { UserContextProvider, useUser };
+
+type User = [any, { login: (username: string, password: string) => Promise<void> }];
+
