@@ -56,7 +56,7 @@ function InfoContextProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  return <infoContext.Provider value={[info, { login }]}>{children}</infoContext.Provider>;
+  return <infoContext.Provider value={[info, { login, getInfo }]}>{children}</infoContext.Provider>;
 }
 
 function useInfo() {
@@ -65,5 +65,11 @@ function useInfo() {
 
 export { InfoContextProvider, useInfo };
 
-type User = [any, { login: (username: string, password: string) => Promise<string> }];
+type User = [
+  any,
+  {
+    login: (username: string, password: string) => Promise<string>;
+    getInfo: (token: string) => Promise<string>;
+  }
+];
 

@@ -7,8 +7,11 @@ import EventsCard from "./_components/home/EventsCard";
 import DateCard from "./_components/home/DateCard";
 import ClassesCard from "./_components/home/ClassesCard";
 import GradesCard from "./_components/home/GradesCard";
+import { useInfo } from "../useInfo";
 
 export default function Home() {
+  const [info] = useInfo();
+
   return (
     // TODO: Make the background color take all the screen even when the browser's height is small enough to scroll.
 

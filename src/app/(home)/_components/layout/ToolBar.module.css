@@ -7,6 +7,6 @@
 }
 
 .toolbarButtonItemActive {
-  @apply border-[#5F9EA0] opacity-100 border-b-4;
+  @apply border-[#5F9EA0] opacity-100 border-b-2;
 }
 
