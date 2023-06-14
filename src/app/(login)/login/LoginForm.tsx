@@ -3,6 +3,7 @@
 import type { Dispatch, MutableRefObject, SetStateAction } from "react";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useInfo } from "../../useInfo";
 
 export default function LoginForm() {
   const usernameRef = useRef(null);
@@ -44,7 +45,7 @@ export default function LoginForm() {
 
 function LoginButton({ refs, setFailed }: Props) {
   const [usernameRef, passwordRef] = refs;
-  const [, { login }] = useUser();
+  const [, { login }] = useInfo();
   const router = useRouter();
 
   async function handleSubmit(e: any) {
@@ -53,12 +54,6 @@ function LoginButton({ refs, setFailed }: Props) {
     setFailed("");
 
     let res = await login(username, password);
-
-    if (res == "connected") {
-      router.push("/");
-      return;
-    }
-    setFailed(res);
   }
 
   return (
@@ -67,8 +62,7 @@ function LoginButton({ refs, setFailed }: Props) {
         className="bg-blue-500 text-white text-sm rounded-md px-4 py-2 hover:bg-emerald-400 focus:bg-emerald-400 transition-colors outline-none"
         onClick={(e) => {
           handleSubmit(e);
-        }}
-      >
+        }}>
         Submit
       </button>
     </div>
@@ -87,4 +81,3 @@ type Props = {
   refs: MutableRefObject<null>[];
   setFailed: Dispatch<SetStateAction<string>>;
 };
-
