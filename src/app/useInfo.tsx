@@ -15,33 +15,41 @@ function InfoContextProvider({ children }: { children: ReactNode }) {
   }, [token]);
 
   const login = async (username: string, password: string) => {
-    // let tokenRes = await fetch("/api/login", {
-    //   method: "POST",
-    //   mode: "cors",
-    //   cache: "no-cache",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({ username, password }),
-    // });
+    try {
+      let tokenRes = await fetch("/api/login", {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
 
-    // let tokenData = await tokenRes.json();
-    let tokenData = "test";
-    setToken(tokenData);
+      let tokenData = await tokenRes.json();
 
-    console.log(token);
+      if (tokenData["error"]) {
+        return "password";
+      }
 
-    // let infoRes = await fetch("/api/login", {
-    //   method: "GET",
-    //   mode: "cors",
-    //   cache: "no-cache",
-    //   headers: {
-    //     authorization: "Bearer " + token,
-    //   },
-    // });
+      setToken(tokenData);
 
-    // let infoData = await infoRes.json();
-    // setInfo(infoData);
+      let infoRes = await fetch("/api/login", {
+        method: "GET",
+        mode: "cors",
+        cache: "no-cache",
+        headers: {
+          authorization: "Bearer " + tokenData,
+        },
+      });
+
+      let infoData = await infoRes.json();
+      setInfo(infoData);
+
+      return "connected";
+    } catch {
+      return "server";
+    }
   };
 
   return <infoContext.Provider value={[info, { login }]}>{children}</infoContext.Provider>;
@@ -53,4 +61,4 @@ function useInfo() {
 
 export { InfoContextProvider, useInfo };
 
-type User = [any, { login: (username: string, password: string) => Promise<void> }];
+type User = [any, { login: (username: string, password: string) => Promise<string> }];

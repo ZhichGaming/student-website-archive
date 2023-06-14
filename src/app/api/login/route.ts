@@ -27,7 +27,11 @@ export async function POST(request: NextRequest) {
     },
     body: new URLSearchParams(Object.entries(body)).toString(),
   });
+
+  if (res.status == 400) {
+    return NextResponse.json({ error: "authorization" });
+  }
+
   const data = await res.json();
   return NextResponse.json(data["access_token"]);
 }
-
