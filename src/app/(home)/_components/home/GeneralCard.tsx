@@ -1,6 +1,6 @@
 export default function GeneralCard() {
   return (
-    <div className="bg-white rounded-md w-full p-8 flex flex-col justify-between flex-grow">
+    <div className="bg-white rounded-md w-full p-8 flex flex-col justify-between">
       <div>
         <h1 className="text-4xl opacity-50 mb-1">
           Welcome back, <b>Your Name</b>!
@@ -18,3 +18,4 @@ export default function GeneralCard() {
     </div>
   );
 }
+
