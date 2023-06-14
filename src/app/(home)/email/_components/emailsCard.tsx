@@ -31,7 +31,7 @@ export default function EmailsCard({ selectedSorting, isReadChecked, isUnreadChe
 		if (selectedSorting == "sd") return b.sender.localeCompare(a.sender);
 		if (selectedSorting == "s") return b.size - a.size;
 	}).map((email) => {
-		return <EmailItem sender={email.sender} subject={email.subject} date={email.date.getDate().toString() + "/" + email.date.getMonth() + "/" + email.date.getFullYear()}/>
+		return <EmailItem sender={email.sender} subject={email.subject} date={email.date.getDate().toString() + "/" + email.date.getMonth()}/>
 	});
 
 	return (

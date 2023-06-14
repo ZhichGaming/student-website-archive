@@ -19,23 +19,23 @@ export default function NavigationCard({ selectedSorting, onSortingChange, isRea
 		<div className="bg-white rounded-md h-full p-4 flex flex-col space-y-4 w-[275px]">
 			<div>
 				<button className="flex items-center pl-2 pr-2 p-1 rounded-md hover:bg-black hover:bg-opacity-10 w-full">
-					<i className="fa-solid fa-inbox mr-2"></i>
+					<i className="fa-solid fa-inbox mr-2 opacity-50"></i>
 					All
 				</button>
 				<button className="flex items-center pl-2 pr-2 p-1 rounded-md hover:bg-black hover:bg-opacity-10 w-full">
-					<i className="fa-solid fa-envelope mr-2"></i>
+					<i className="fa-solid fa-envelope mr-2 opacity-50"></i>
 					Unread
 				</button>
 				<button className="flex items-center pl-2 pr-2 p-1 rounded-md hover:bg-black hover:bg-opacity-10 w-full">
-					<i className="fa-solid fa-paper-plane mr-2"></i>
+					<i className="fa-solid fa-paper-plane mr-2 opacity-50"></i>
 					Sent
 				</button>
 				<button className="flex items-center pl-2 pr-2 p-1 rounded-md hover:bg-black hover:bg-opacity-10 w-full">
-					<i className="fa-solid fa-pencil mr-2"></i>
+					<i className="fa-solid fa-pencil mr-2 opacity-50"></i>
 					Draft
 				</button>
 				<button className="flex items-center pl-2 pr-2 p-1 rounded-md hover:bg-black hover:bg-opacity-10 w-full">
-					<i className="fa-solid fa-trash mr-2"></i>
+					<i className="fa-solid fa-trash mr-2 opacity-50"></i>
 					Trash
 				</button>
 			</div>
