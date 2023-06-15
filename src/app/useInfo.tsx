@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import type { Info } from "./types";
 
-const infoContext = createContext<User>(null);
+const infoContext = createContext<InfoContext>(null);
 
 function InfoContextProvider({ children }: { children: ReactNode }) {
   const [token, setToken] = useState<string>();
@@ -63,13 +63,12 @@ function useInfo() {
   return useContext(infoContext);
 }
 
-export { InfoContextProvider, useInfo };
+export { InfoContextProvider, useInfo, type InfoContext };
 
-type User = [
-  any,
+type InfoContext = [
+  Info,
   {
     login: (username: string, password: string) => Promise<string>;
     getInfo: (token: string) => Promise<string>;
   }
 ];
-

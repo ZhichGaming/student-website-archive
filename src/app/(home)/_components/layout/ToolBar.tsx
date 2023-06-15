@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import Logo from "../../../favicon.ico";
 import ToolbarLink from "./ToolbarLink";
+import ToolbarAccount from "./ToolbarAccount";
 
 export default function Toolbar() {
   return (
@@ -15,10 +16,8 @@ export default function Toolbar() {
       </div>
 
       <div className="flex items-center ml-auto">
-        <p>Your Name</p>
-        <Image src="" alt="Profile picture" className="w-12 h-12 object-cover rounded-full ml-2" width={258} height={258} />
+        <ToolbarAccount />
       </div>
     </div>
   );
 }
-
