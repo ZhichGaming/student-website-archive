@@ -13,12 +13,10 @@ export default function Home() {
   const [info] = useInfo();
 
   return (
-    // TODO: Make the background color take all the screen even when the browser's height is small enough to scroll.
-
     <div>
       <div className="p-12 flex flex-col h-full space-y-6 mb-6">
         <div className="flex space-x-6">
-          <GeneralCard />
+          <GeneralCard name={info?.info?.name} />
           <div className="flex flex-col w-5/12 space-y-6">
             <EventsCard />
             <Image className="w-full rounded-md flex h-1/3 object-cover object-bottom" src={BackgroundImage} alt="Image of the school entrance" />
@@ -33,4 +31,3 @@ export default function Home() {
     </div>
   );
 }
-

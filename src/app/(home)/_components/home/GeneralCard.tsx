@@ -1,12 +1,21 @@
-export default function GeneralCard() {
+export default function GeneralCard({ name }: Props) {
+  let [weekday, day] = new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" }).split(", ");
+  let [month, date] = day.split(" ");
+  let th = getTH(parseInt(date));
+
   return (
     <div className="bg-white rounded-md w-full p-8 flex flex-col justify-between">
       <div>
         <h1 className="text-4xl opacity-50 mb-1">
-          Welcome back, <b>Your Name</b>!
+          Welcome back, <b>{name}</b>!
         </h1>
         <p className="text-lg opacity-50">
-          Today is <b>Wednesday</b>, the <b>7th of June</b>.
+          Today is <b>{weekday}</b>, the{" "}
+          <b>
+            {date}
+            {th} of {month}
+          </b>
+          .
         </p>
       </div>
       <div>
@@ -19,3 +28,20 @@ export default function GeneralCard() {
   );
 }
 
+function getTH(number: number): string {
+  if (number > 3 && number < 21) return "th";
+  switch (number % 10) {
+    case 1:
+      return "st";
+    case 2:
+      return "nd";
+    case 3:
+      return "rd";
+    default:
+      return "th";
+  }
+}
+
+type Props = {
+  name: string;
+};

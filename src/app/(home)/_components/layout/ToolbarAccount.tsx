@@ -8,10 +8,7 @@ export default function ToolbarAccount() {
 
   return (
     <>
-      <p>
-        {info?.info?.firstname}&nbsp;
-        {info?.info?.name}
-      </p>
+      <p>{info?.info?.name}</p>
       <Image src={info?.img?.portrait} alt="Profile picture" className="w-12 h-12 object-cover rounded-full ml-2" width={258} height={258} />
     </>
   );

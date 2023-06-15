@@ -6,7 +6,6 @@ type Info = {
 
 type UserInfo = {
   name: string;
-  firstname: string;
   permcode: string;
   group: string;
   enriched: string;
@@ -38,4 +37,3 @@ type GradeExam = {
 };
 
 export type { Info, Grades, UserInfo, InfoImg, GradeCompetency, GradeExam };
-

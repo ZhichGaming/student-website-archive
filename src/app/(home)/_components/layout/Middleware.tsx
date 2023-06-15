@@ -14,7 +14,8 @@ export default function Middleware() {
   const [, { getInfo }] = useInfo();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    // const token = localStorage.getItem("token");
+    const token = process.env.NEXT_PUBLIC_TOKEN;
 
     if (token == "undefined") {
       router.push("/login");
@@ -22,7 +23,6 @@ export default function Middleware() {
     } else {
       getInfo(token);
     }
-  });
+  }, []);
   return <></>;
 }
-

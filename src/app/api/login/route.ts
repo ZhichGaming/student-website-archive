@@ -15,8 +15,7 @@ export async function GET(request: NextRequest) {
   const info: Info = {
     id: data.CleUnique,
     info: {
-      name: data.Nom,
-      firstname: data.Prenom,
+      name: data.Prenom + " " + data.Nom,
       permcode: data.CodePermanent,
       group: data.Foyer,
       enriched: data.CleFlexible,
@@ -53,4 +52,3 @@ export async function POST(request: NextRequest) {
   const data = await res.json();
   return NextResponse.json(data["access_token"]);
 }
-
