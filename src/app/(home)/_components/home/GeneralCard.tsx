@@ -12,8 +12,8 @@ export default function GeneralCard({ name }: Props) {
         <p className="text-lg opacity-50">
           Today is <b>{weekday}</b>, the{" "}
           <b>
-            {date}
-            {th} of {month}
+            {date + th}
+            of {month}
           </b>
           .
         </p>
