@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
   data.forEach((x: any, i: number) => {
     if (i == 0 || i == 4 || i == 7) return;
 
-    ans.push([getClassname(x.Cours.slice(0, -3)), parseInt(x.HeureFin)]);
+    ans.push({ name: getClassname(x.Cours.slice(0, -3)), time: parseInt(x.HeureFin) });
   });
 
   return NextResponse.json(ans);
@@ -47,3 +47,4 @@ function getClassname(id: string): string {
 
   return classes[id];
 }
+

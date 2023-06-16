@@ -1,7 +1,12 @@
-export default function GeneralCard({ name }: Props) {
-  let [weekday, day] = new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" }).split(", ");
-  let [month, date] = day.split(" ");
-  let th = getTH(parseInt(date));
+"use client";
+
+import { useInfo } from "../../../useInfo";
+
+export default function GeneralCard() {
+  const [weekday, day] = new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" }).split(", ");
+  const [month, date] = day.split(" ");
+  const name = useInfo()[0]?.info?.name;
+  const th = getTH(parseInt(date));
 
   return (
     <div className="bg-white rounded-md w-full p-8 flex flex-col justify-between">
@@ -45,3 +50,4 @@ function getTH(number: number): string {
 type Props = {
   name: string;
 };
+

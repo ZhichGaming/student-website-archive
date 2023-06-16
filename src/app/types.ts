@@ -36,4 +36,10 @@ type GradeExam = {
   average: number;
 };
 
-export type { Info, Grades, UserInfo, InfoImg, GradeCompetency, GradeExam };
+type Today = {
+  name: string;
+  time: number;
+}[];
+
+export type { Info, Grades, UserInfo, InfoImg, GradeCompetency, GradeExam, Today };
+

@@ -2,17 +2,38 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode } from "react";
-import type { Info } from "./types";
+import type { Info, Today } from "./types";
 
 const infoContext = createContext<InfoContext>(null);
 
 function InfoContextProvider({ children }: { children: ReactNode }) {
   const [token, setToken] = useState<string>();
   const [info, setInfo] = useState<Info>();
+  const [today, setToday] = useState<Today>();
 
   useEffect(() => {
     localStorage.setItem("token", token);
   }, [token]);
+
+  const getToday = async (tokenData: string, id: string) => {
+    const today = new Date().toLocaleDateString("en-CA").replaceAll("-", "");
+    const params = new URLSearchParams();
+    params.append("cleUniqueEleve", id);
+    params.append("dateDebut", today);
+    params.append("dateFin", today);
+
+    const res = await fetch("/api/today?" + params, {
+      method: "GET",
+      mode: "cors",
+      cache: "no-cache",
+      headers: {
+        authorization: "Bearer " + tokenData,
+      },
+    });
+    const data = await res.json();
+
+    setToday(data);
+  };
 
   const getInfo = async (tokenData: string) => {
     let infoRes = await fetch("/api/login", {
@@ -26,6 +47,8 @@ function InfoContextProvider({ children }: { children: ReactNode }) {
 
     let infoData = await infoRes.json();
     setInfo(infoData);
+
+    getToday(tokenData, infoData.id);
 
     return "connected";
   };
@@ -56,12 +79,7 @@ function InfoContextProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const getToday = async () => {
-    const today = new Date().toLocaleDateString("en-CA").replaceAll("-", "");
-    const params = new URLSearchParams();
-  };
-
-  return <infoContext.Provider value={[info, { login, getInfo }]}>{children}</infoContext.Provider>;
+  return <infoContext.Provider value={[info, { login, getInfo }, today]}>{children}</infoContext.Provider>;
 }
 
 function useInfo() {
@@ -75,5 +93,7 @@ type InfoContext = [
   {
     login: (username: string, password: string) => Promise<string>;
     getInfo: (token: string) => Promise<string>;
-  }
+  },
+  Today
 ];
+
