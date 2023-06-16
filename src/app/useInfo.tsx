@@ -56,6 +56,11 @@ function InfoContextProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const getToday = async () => {
+    const today = new Date().toLocaleDateString("en-CA").replaceAll("-", "");
+    const params = new URLSearchParams();
+  };
+
   return <infoContext.Provider value={[info, { login, getInfo }]}>{children}</infoContext.Provider>;
 }
 
