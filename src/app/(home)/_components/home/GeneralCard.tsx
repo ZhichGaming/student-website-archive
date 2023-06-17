@@ -1,6 +1,7 @@
 "use client";
 
 import { useInfo } from "../../../useInfo";
+import { TextSkeleton } from "../loading/Skeleton";
 
 export default function GeneralCard() {
   const [weekday, day] = new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" }).split(", ");
@@ -11,17 +12,18 @@ export default function GeneralCard() {
   return (
     <div className="bg-white rounded-md w-full p-8 flex flex-col justify-between">
       <div>
-        <h1 className="text-4xl opacity-50 mb-1">
-          Welcome back, <b>{name}</b>!
-        </h1>
-        <p className="text-lg opacity-50">
+        <TextSkeleton className="text-4xl h-10 opacity-50 mb-1" w={30} keyAwaited={name}>
+          <h1 className="text-4xl opacity-50 mb-1">
+            Welcome back, <b>{name}</b>!
+          </h1>
+        </TextSkeleton>
+        <TextSkeleton className="text-4xl h-5 opacity-50 mb-1" w={20} keyAwaited={name}>
           Today is <b>{weekday}</b>, the{" "}
           <b>
-            {date + th}
-            of {month}
+            {date + th} of {month}
           </b>
           .
-        </p>
+        </TextSkeleton>
       </div>
       <div>
         <p className="opacity-50 mb-1">Quote of the day</p>

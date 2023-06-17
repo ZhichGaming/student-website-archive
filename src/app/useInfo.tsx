@@ -16,7 +16,9 @@ function InfoContextProvider({ children }: { children: ReactNode }) {
   }, [token]);
 
   const getToday = async (tokenData: string, id: string) => {
-    const today = new Date().toLocaleDateString("en-CA").replaceAll("-", "");
+    // this if for testing purposes
+    const today = new Date(2023, 5, 16).toLocaleDateString("en-CA").replaceAll("-", "");
+    // const today = new Date().toLocaleDateString("en-CA").replaceAll("-", "");
     const params = new URLSearchParams();
     params.append("cleUniqueEleve", id);
     params.append("dateDebut", today);
@@ -96,4 +98,3 @@ type InfoContext = [
   },
   Today
 ];
-

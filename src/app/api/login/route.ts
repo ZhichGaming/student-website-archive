@@ -26,7 +26,6 @@ export async function GET(request: NextRequest) {
       barcode: data.CodeBarre,
     },
   };
-  console.log(info);
 
   return NextResponse.json(info);
 }
