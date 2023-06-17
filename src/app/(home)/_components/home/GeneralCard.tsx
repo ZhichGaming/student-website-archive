@@ -50,4 +50,3 @@ function getTH(number: number): string {
 type Props = {
   name: string;
 };
-
