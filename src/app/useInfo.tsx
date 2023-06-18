@@ -39,6 +39,8 @@ function InfoContextProvider({ children }: { children: ReactNode }) {
   };
 
   const getGrade = async (tokenData: string, classes: Classes) => {
+    // TODO: return data in object
+
     let semesters = 3;
     for (let j = 1; j <= semesters; j++) {
       classes.forEach(async (x) => {
