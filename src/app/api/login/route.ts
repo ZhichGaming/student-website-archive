@@ -14,6 +14,7 @@ export async function GET(request: NextRequest) {
 
   const info: Info = {
     id: data.CleUnique,
+    time: data.PeriodeEtudesCarteIdentite,
     info: {
       name: data.Prenom + " " + data.Nom,
       permcode: data.CodePermanent,

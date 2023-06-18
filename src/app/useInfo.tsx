@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode } from "react";
-import type { Info, Today } from "./types";
+import type { Info, Today, Classes } from "./types";
 
 const infoContext = createContext<InfoContext>(null);
 
@@ -10,6 +10,7 @@ function InfoContextProvider({ children }: { children: ReactNode }) {
   const [token, setToken] = useState<string>();
   const [info, setInfo] = useState<Info>();
   const [today, setToday] = useState<Today>();
+  const [classes, setClasses] = useState<Classes>();
 
   useEffect(() => {
     localStorage.setItem("token", token);
@@ -37,6 +38,52 @@ function InfoContextProvider({ children }: { children: ReactNode }) {
     setToday(data);
   };
 
+  const getGrade = async (tokenData: string, classes: Classes) => {
+    let semesters = 3;
+    for (let j = 1; j <= semesters; j++) {
+      classes.forEach(async (x) => {
+        for (let i = 0; i < parseInt(x.nbCompetencies); i++) {
+          const params = new URLSearchParams();
+          params.append("Competence", x.id + "~" + i);
+          params.append("Etape", j.toString());
+          params.append("cleClasse", x.id);
+
+          const res = await fetch("/api/grades?" + params, {
+            method: "GET",
+            mode: "cors",
+            next: { revalidate: 60 },
+            cache: "default",
+            headers: {
+              authorization: "Bearer " + tokenData,
+            },
+          });
+          const data = await res.json();
+          console.log(data);
+        }
+      });
+    }
+  };
+
+  const getClasses = async (tokenData: string, id: string, time: string) => {
+    const params = new URLSearchParams();
+    params.append("cleUniqueEleve", id);
+    params.append("periodeEtudes", time);
+
+    const res = await fetch("/api/classes?" + params, {
+      method: "GET",
+      mode: "cors",
+      cache: "no-cache",
+      headers: {
+        authorization: "Bearer " + tokenData,
+      },
+    });
+    const data = await res.json();
+
+    // getGrade(tokenData, data);
+
+    setClasses(data);
+  };
+
   const getInfo = async (tokenData: string) => {
     let infoRes = await fetch("/api/login", {
       method: "GET",
@@ -51,6 +98,7 @@ function InfoContextProvider({ children }: { children: ReactNode }) {
     setInfo(infoData);
 
     getToday(tokenData, infoData.id);
+    getClasses(tokenData, infoData.id, infoData.time);
 
     return "connected";
   };

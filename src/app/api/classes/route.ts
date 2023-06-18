@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
     params.append(key, value);
   });
 
-  const res = await fetch("https://portailc.jdlm.qc.ca/pednet/mobile/api/agenda?" + params, {
+  const res = await fetch("https://portailc.jdlm.qc.ca/pednet/mobile/api/inscriptions?" + params, {
     method: "GET",
     mode: "cors",
     cache: "no-cache",
@@ -19,9 +19,9 @@ export async function GET(req: NextRequest) {
 
   const ans = [];
   data.forEach((x: any, i: number) => {
-    if (i == 0 || i == 4 || i == 7) return;
+    if (x.Competences.length < 1) return;
 
-    ans.push({ name: getClassname(x.Cours.slice(0, -3)), time: parseInt(x.HeureFin) });
+    ans.push({ name: getClassname(x.Cours.slice(0, -3)), id: x.CleClasse, nbCompetencies: x.Competences.length, competenciesNames: x.Competences.map((e) => e.Titre) });
   });
 
   return NextResponse.json(ans);

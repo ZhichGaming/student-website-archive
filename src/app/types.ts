@@ -1,5 +1,6 @@
 type Info = {
   id: string;
+  time: string;
   info: UserInfo;
   img: InfoImg;
 };
@@ -41,5 +42,10 @@ type Today = {
   time: number;
 }[];
 
-export type { Info, Grades, UserInfo, InfoImg, GradeCompetency, GradeExam, Today };
+type Classes = {
+  name: string;
+  id: string;
+  nbCompetencies: string;
+}[];
 
+export type { Info, Grades, UserInfo, InfoImg, GradeCompetency, GradeExam, Classes, Today };
