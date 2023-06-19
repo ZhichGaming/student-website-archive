@@ -50,23 +50,25 @@ function InfoContextProvider({ children }: { children: ReactNode }) {
         for (let j = 1; j <= semesters; j++) {
           const semesterGrades = [];
           for (let i = 0; i < parseInt(x.nbCompetencies); i++) {
-            const params = new URLSearchParams();
-            params.append("Competence", x.id + "~" + i);
-            params.append("Etape", j.toString());
-            params.append("cleClasse", x.id);
+            // const params = new URLSearchParams();
+            // params.append("Competence", x.id + "~" + i);
+            // params.append("Etape", j.toString());
+            // params.append("cleClasse", x.id);
 
-            const res = await fetch("/api/grades?" + params, {
-              method: "GET",
-              mode: "cors",
-              next: { revalidate: 60 },
-              cache: "default",
-              headers: {
-                authorization: "Bearer " + tokenData,
-              },
-            });
-            const data = await res.json();
-            console.log(data);
+            // const res = await fetch("/api/grades?" + params, {
+            //   method: "GET",
+            //   mode: "cors",
+            //   next: { revalidate: 60 },
+            //   cache: "default",
+            //   headers: {
+            //     authorization: "Bearer " + tokenData,
+            //   },
+            // });
+            // const data = await res.json();
+            // semesterGrades.push(data);
+            semesterGrades.push(1);
           }
+          tempClass.push(semesterGrades);
         }
       }, 1000);
 
@@ -74,6 +76,8 @@ function InfoContextProvider({ children }: { children: ReactNode }) {
       out[x.name] = tempClass;
       allGrades.push(out);
     });
+
+    console.log(allGrades);
 
     setGrades(allGrades);
   };
@@ -160,3 +164,4 @@ type InfoContext = [
   },
   Today
 ];
+
