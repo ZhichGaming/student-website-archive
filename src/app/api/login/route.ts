@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
+import type { Info } from "../../types";
 
 export async function GET(request: NextRequest) {
   const res = await fetch("https://portailc.jdlm.qc.ca/pednet/mobile/api/informations", {
     method: "GET",
-
     mode: "cors",
     cache: "no-cache",
     headers: {
@@ -11,7 +11,24 @@ export async function GET(request: NextRequest) {
     },
   });
   const data = await res.json();
-  return NextResponse.json(data);
+
+  const info: Info = {
+    id: data.CleUnique,
+    info: {
+      name: data.Prenom + " " + data.Nom,
+      permcode: data.CodePermanent,
+      group: data.Foyer,
+      enriched: data.CleFlexible,
+      locker: data.Casier,
+    },
+    img: {
+      portrait: data.Photographie,
+      barcode: data.CodeBarre,
+    },
+  };
+  console.log(info);
+
+  return NextResponse.json(info);
 }
 
 export async function POST(request: NextRequest) {
@@ -27,7 +44,11 @@ export async function POST(request: NextRequest) {
     },
     body: new URLSearchParams(Object.entries(body)).toString(),
   });
+
+  if (res.status == 400) {
+    return NextResponse.json({ error: "authorization" });
+  }
+
   const data = await res.json();
   return NextResponse.json(data["access_token"]);
 }
-

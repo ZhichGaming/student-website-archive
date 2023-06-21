@@ -2,6 +2,7 @@ import "./_globalCss/globals.css";
 import "./_globalCss/all.min.css";
 import { Inter } from "next/font/google";
 import { InfoContextProvider } from "./useInfo";
+import Middleware from "./(home)/_components/layout/Middleware";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,8 +14,11 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <InfoContextProvider>{children}</InfoContextProvider>
+      <body className={`${inter.className} bg-neutral-100`}>
+        <InfoContextProvider>
+          <Middleware />
+          {children}
+        </InfoContextProvider>
       </body>
     </html>
   );

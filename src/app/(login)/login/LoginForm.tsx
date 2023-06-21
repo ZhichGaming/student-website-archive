@@ -54,6 +54,13 @@ function LoginButton({ refs, setFailed }: Props) {
     setFailed("");
 
     let res = await login(username, password);
+
+    if (res == "connected") {
+      router.push("/");
+      return;
+    }
+
+    setFailed(res);
   }
 
   return (
