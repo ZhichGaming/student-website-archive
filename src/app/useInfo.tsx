@@ -2,7 +2,8 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode } from "react";
-import type { Info, Today, Classes, Grades } from "./types";
+import type { Info, Today, Class, Grade } from "./types";
+import { delay } from "./_utils/timeout";
 
 const infoContext = createContext<InfoContext>(null);
 
@@ -10,8 +11,8 @@ function InfoContextProvider({ children }: { children: ReactNode }) {
   const [token, setToken] = useState<string>();
   const [info, setInfo] = useState<Info>();
   const [today, setToday] = useState<Today>();
-  const [classes, setClasses] = useState<Classes>();
-  const [grades, setGrades] = useState<Grades>();
+  const [classes, setClasses] = useState<Class[]>();
+  const [grades, setGrades] = useState<Grade[]>();
 
   useEffect(() => {
     localStorage.setItem("token", token);
@@ -19,7 +20,7 @@ function InfoContextProvider({ children }: { children: ReactNode }) {
 
   const getToday = async (tokenData: string, id: string) => {
     // this if for testing purposes
-    const today = new Date(2023, 5, 16).toLocaleDateString("en-CA").replaceAll("-", "");
+    const today = new Date().toLocaleDateString("en-CA").replaceAll("-", "");
     // const today = new Date().toLocaleDateString("en-CA").replaceAll("-", "");
     const params = new URLSearchParams();
     params.append("cleUniqueEleve", id);
@@ -39,41 +40,40 @@ function InfoContextProvider({ children }: { children: ReactNode }) {
     setToday(data);
   };
 
-  const getGrade = async (tokenData: string, classes: Classes) => {
+  const getGrade = async (tokenData: string, classes: Class[], semester: string) => {
     // TODO: return data in object
     const allGrades = [];
 
-    let semesters = 3;
     classes.forEach(async (x) => {
-      const tempClass = [];
-      setTimeout(async () => {
-        for (let j = 1; j <= semesters; j++) {
-          const semesterGrades = [];
-          for (let i = 0; i < parseInt(x.nbCompetencies); i++) {
-            // const params = new URLSearchParams();
-            // params.append("Competence", x.id + "~" + i);
-            // params.append("Etape", j.toString());
-            // params.append("cleClasse", x.id);
+      const semesterGrades = {};
+      for (let i = 0; i < parseInt(x.nbCompetencies); i++) {
+        await delay(1000);
+        let name = x.competencies[i].name;
+        const params = new URLSearchParams();
+        params.append("Competence", x.id + "~" + (i + 1));
+        params.append("Etape", semester);
+        params.append("cleClasse", x.id);
 
-            // const res = await fetch("/api/grades?" + params, {
-            //   method: "GET",
-            //   mode: "cors",
-            //   next: { revalidate: 60 },
-            //   cache: "default",
-            //   headers: {
-            //     authorization: "Bearer " + tokenData,
-            //   },
-            // });
-            // const data = await res.json();
-            // semesterGrades.push(data);
-            semesterGrades.push(1);
-          }
-          tempClass.push(semesterGrades);
+        try {
+          const res = await fetch("/api/grades?" + params, {
+            method: "GET",
+            mode: "cors",
+            next: { revalidate: 60 },
+            cache: "default",
+            headers: {
+              authorization: "Bearer " + tokenData,
+            },
+          });
+          const data = await res.json();
+
+          semesterGrades[name] = data;
+        } catch {
+          semesterGrades[name] = {};
         }
-      }, 1000);
+      }
 
       const out = {};
-      out[x.name] = tempClass;
+      out[x.name] = semesterGrades;
       allGrades.push(out);
     });
 
@@ -82,7 +82,7 @@ function InfoContextProvider({ children }: { children: ReactNode }) {
     setGrades(allGrades);
   };
 
-  const getClasses = async (tokenData: string, id: string, time: string) => {
+  const getClasses = async (tokenData: string, id: string, time: string, semester: string) => {
     const params = new URLSearchParams();
     params.append("cleUniqueEleve", id);
     params.append("periodeEtudes", time);
@@ -97,7 +97,7 @@ function InfoContextProvider({ children }: { children: ReactNode }) {
     });
     const data = await res.json();
 
-    // getGrade(tokenData, data);
+    getGrade(tokenData, data, semester);
 
     setClasses(data);
   };
@@ -112,11 +112,11 @@ function InfoContextProvider({ children }: { children: ReactNode }) {
       },
     });
 
-    let infoData = await infoRes.json();
+    let infoData: Info = await infoRes.json();
     setInfo(infoData);
 
     getToday(tokenData, infoData.id);
-    getClasses(tokenData, infoData.id, infoData.time);
+    getClasses(tokenData, infoData.id, infoData.time, infoData.semester.toString());
 
     return "connected";
   };
@@ -164,4 +164,3 @@ type InfoContext = [
   },
   Today
 ];
-

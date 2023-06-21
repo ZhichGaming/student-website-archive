@@ -23,18 +23,20 @@ export default function ClassesCard() {
       </p>
       <div className="flex flex-col justify-between space-y-2">
         <Skeleton className="rounded py-5" keyAwaited={classes} times={5}>
-          {classes?.map((x, i) => {
-            let color = "bg-neutral-100";
-            if (x.time > now) {
-              color = !current ? "bg-[#9AB3D9]" : "bg-neutral-100";
-              current = true;
-            }
-            return (
-              <div className={`${color} rounded text-center py-2`} key={i}>
-                {x.name}
-              </div>
-            );
-          })}
+          {classes?.length > 0
+            ? classes?.map((x, i) => {
+                let color = "bg-neutral-100";
+                if (x.time > now) {
+                  color = !current ? "bg-[#9AB3D9]" : "bg-neutral-100";
+                  current = true;
+                }
+                return (
+                  <div className={`${color} rounded text-center py-2`} key={i}>
+                    {x.name}
+                  </div>
+                );
+              })
+            : "no classes today :)"}
         </Skeleton>
       </div>
     </div>

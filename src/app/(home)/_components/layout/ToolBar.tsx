@@ -12,7 +12,7 @@ export default function Toolbar() {
       <div className="group">
         <ToolbarLink url="/" label="Home" />
         <ToolbarLink url="/email" label="Email" />
-        <ToolbarLink url="/portal" label="Portal" />
+        <ToolbarLink url="/grades" label="Grades" />
       </div>
 
       <div className="flex items-center ml-auto">

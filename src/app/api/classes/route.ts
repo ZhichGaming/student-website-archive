@@ -21,7 +21,15 @@ export async function GET(req: NextRequest) {
   data.forEach((x: any, i: number) => {
     if (x.Competences.length < 1) return;
 
-    ans.push({ name: getClassname(x.Cours.slice(0, -3)), id: x.CleClasse, nbCompetencies: x.Competences.length, competenciesNames: x.Competences.map((e) => e.Titre) });
+    ans.push({
+      name: getClassname(x.Cours.slice(0, -3)),
+      id: x.CleClasse,
+      nbCompetencies: x.Competences.length,
+      competencies: x.Competences.map((e) => {
+        let current = e.Titre.split(" ");
+        return { name: current[1], ponderation: Number(current[0].match(/[0-9]+/g)[0]) };
+      }),
+    });
   });
 
   return NextResponse.json(ans);
