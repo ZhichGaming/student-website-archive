@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode } from "react";
-import type { Info, Today } from "./types";
+import type { Info, Today, Quote } from "./types";
 
 const infoContext = createContext<InfoContext>(null);
 
@@ -10,6 +10,7 @@ function InfoContextProvider({ children }: { children: ReactNode }) {
   const [token, setToken] = useState<string>();
   const [info, setInfo] = useState<Info>();
   const [today, setToday] = useState<Today>();
+  const [quote, setQuote] = useState<Quote>();
 
   useEffect(() => {
     localStorage.setItem("token", token);
@@ -79,7 +80,26 @@ function InfoContextProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  return <infoContext.Provider value={[info, { login, getInfo }, today]}>{children}</infoContext.Provider>;
+  const getQuote = async () => {
+    let quoteRes = await fetch("/api/quote", {
+      method: "GET",
+      mode: "cors",
+      cache: "no-cache"
+    });
+    
+    const quoteData = await quoteRes.json();
+
+    if (quoteData.quote == "Too many requests. Obtain an auth key for unlimited access.") {
+      setQuote({"quote": "Too many requests. Please try again later."});
+    } 
+    else {
+      setQuote(quoteData);
+    }
+
+    return "connected";
+  };
+
+  return <infoContext.Provider value={[info, { login, getInfo, getQuote }, today, quote]}>{children}</infoContext.Provider>;
 }
 
 function useInfo() {
@@ -93,7 +113,9 @@ type InfoContext = [
   {
     login: (username: string, password: string) => Promise<string>;
     getInfo: (token: string) => Promise<string>;
+    getQuote: () => Promise<string>;
   },
-  Today
+  Today,
+  Quote
 ];
 

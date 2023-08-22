@@ -1,12 +1,18 @@
 "use client";
 
-import { useInfo } from "../../../useInfo";
+import { type InfoContext, useInfo } from "../../../useInfo";
+import { useEffect } from "react";
 
 export default function GeneralCard() {
   const [weekday, day] = new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" }).split(", ");
   const [month, date] = day.split(" ");
   const name = useInfo()[0]?.info?.name;
   const th = getTH(parseInt(date));
+  const [,{getQuote},,quote]: InfoContext = useInfo();
+
+  useEffect(() => {
+    getQuote();
+  }, []);
 
   return (
     <div className="bg-white rounded-md w-full p-8 flex flex-col justify-between shadow-sm">
@@ -24,7 +30,7 @@ export default function GeneralCard() {
         </p>
       </div>
       <div className="bg-[#FAF4EF] rounded-md h-28 flex items-center justify-center">
-        <p className="text-xl text-center m-4 font-serif">Teamwork makes dreams work!</p>
+        <p className="text-lg text-center m-4 font-serif">{quote?.quote ?? "Loading quote of the day..."}</p>
       </div>
     </div>
   );
