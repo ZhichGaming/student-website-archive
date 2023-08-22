@@ -20,7 +20,7 @@ export default function EventsCard({ selectedCalendar , selectedDate }: { select
     ));
 
     return (
-        <div className="flex flex-col bg-white p-4 rounded-md w-80 h-full">
+        <div className="flex flex-col bg-white p-4 rounded-md w-80 h-full shadow-sm">
             <h2 className="font-bold text-lg ml-2 mb-2">Events This Month</h2>
             {eventsHtml}
         </div>

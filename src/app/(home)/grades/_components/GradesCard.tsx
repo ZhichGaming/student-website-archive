@@ -34,7 +34,7 @@ export default function GradesCard({ gradeCategories, selectedClass, term, searc
     ));
 
     return (
-        <div className="flex flex-col bg-white p-4 rounded-md h-full space-y-6">
+        <div className="flex flex-col bg-white p-4 rounded-md h-full space-y-6 shadow-sm">
             {gradeCategoriesHtml}
         </div>
     );

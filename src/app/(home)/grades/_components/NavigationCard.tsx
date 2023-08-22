@@ -19,7 +19,7 @@ export default function NavigationCard({ gradeCategories, selectedClass, onSelec
     }
 
     return (
-        <div className="flex bg-white items-center space-x-2 p-2 px-6 rounded-md justify-between">
+        <div className="flex bg-white items-center space-x-2 p-2 px-6 rounded-md justify-between shadow-sm">
             <div className="flex space-x-2">
                 <select className="border border-gray-300 rounded-md p-1 w-64" onChange={handleSelectedClassChange}>
                     <option>All</option>

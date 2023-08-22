@@ -74,7 +74,7 @@ export default function NavigationCard({ selectedCalendar, onCalendarChange, sel
     }
 
     return (
-        <div className="flex bg-white items-center space-x-2 p-2 px-6 rounded-md justify-between">
+        <div className="flex bg-white items-center space-x-2 p-2 px-6 rounded-md justify-between shadow-sm">
             <div className="flex items-center space-x-2">
                 <p className="w-36">{getStyledDate()}</p>
                 <button className="w-10 h-10 bg-black bg-opacity-10 rounded-md" onClick={onClickOfPreviousButton}>

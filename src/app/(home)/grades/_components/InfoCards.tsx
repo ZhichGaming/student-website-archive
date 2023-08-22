@@ -10,7 +10,7 @@ export default function InfoCards({ gradeCategories }: { gradeCategories: any[] 
 
 function YearlyAverageCard({ gradeCategories }: { gradeCategories: any[] }) {
     return (
-        <div className="flex flex-col bg-white p-4 rounded-md space-y-4">
+        <div className="flex flex-col bg-white p-4 rounded-md space-y-4 shadow-sm">
             <div className="space-y-1">
                 <h2 className="text-sm opacity-50">Yearly Average</h2>
                 <p className="text-xl font-bold">57.8%</p>
@@ -21,7 +21,7 @@ function YearlyAverageCard({ gradeCategories }: { gradeCategories: any[] }) {
 
 function TermAverageCard({ gradeCategories }: { gradeCategories: any[] }) {
     return (
-        <div className="flex flex-col bg-white p-4 rounded-md space-y-4">
+        <div className="flex flex-col bg-white p-4 rounded-md space-y-4 shadow-sm">
             <div className="space-y-4">
                 <div className="space-y-1">
                     <h2 className="text-sm opacity-50">Term Average</h2>
@@ -50,7 +50,7 @@ function ClassesAverageCard({ gradeCategories }: { gradeCategories: any[] }) {
     ))
 
     return (
-        <div className="flex flex-col bg-white p-4 rounded-md space-y-1">
+        <div className="flex flex-col bg-white p-4 rounded-md space-y-1 shadow-sm shadow-sm">
             <h2 className="text-sm opacity-50">Averages</h2>
             <table className="text-left">
                 <tr>

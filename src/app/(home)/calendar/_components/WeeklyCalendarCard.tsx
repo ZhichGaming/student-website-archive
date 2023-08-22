@@ -17,7 +17,7 @@ export default function WeeklyCalendar({ selectedDate }: { selectedDate: Date })
     // const colors = ["bg-red-200", "bg-orange-200", "bg-yellow-200", "bg-lime-200", "bg-teal-200", "bg-cyan-200", "bg-blue-200", "bg-violet-200", "bg-green-200", "bg-rose-200"]
 
     return (
-        <div className="flex flex-col flex-grow bg-white items-center space-x-2 p-6 rounded-md">
+        <div className="flex flex-col flex-grow bg-white items-center space-x-2 p-6 rounded-md shadow-sm">
             <div className="grid grid-cols-7 grid-rows-1 gap-1 justify-around w-full text-center mb-2">
                 {Array.from({ length: 7 }, (_, index) => (
                     <WeeklyCalendarDayText text={days[index]} date={week[index]}/>

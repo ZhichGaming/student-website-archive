@@ -8,14 +8,14 @@ export default function MonthlyCalendar({ selectedDate }: { selectedDate: Date }
     var firstDayOfMonth = getFirstDayOfMonth(selectedDate);
 
     return (
-        <div className="flex flex-col flex-grow bg-white items-center space-x-2 p-6 rounded-md">
+        <div className="flex flex-col flex-grow bg-white items-center space-x-2 p-6 rounded-md shadow-sm">
             <div className="grid grid-cols-7 grid-rows-1 gap-1 justify-around w-full text-center mb-2">
                 {days.map((day) => (
                     <p className="text-lg">{day}</p>
                 ))}
             </div>
             <div className="grid grid-cols-7 grid-rows-6 gap-1 flex-grow w-full">
-                {Array.from({ length: (42-numDaysInMonth-firstDayOfMonth) }, (_, index) => (
+                {Array.from({ length: (42-(42-numDaysInMonth-firstDayOfMonth)-numDaysInMonth) }, (_, index) => (
                     <div className="flex rounded border-black border-opacity-25 border bg-black bg-opacity-10">
                         {/* <p className="p-1 ml-1">{numDaysInLastMonth - index}</p> */}
                         <MonthCalendarDayText text={(numDaysInLastMonth - index).toString()} date={new Date(selectedDate.getFullYear(), selectedDate.getMonth() - 1, numDaysInLastMonth - index)}/>

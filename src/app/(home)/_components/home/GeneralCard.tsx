@@ -9,25 +9,22 @@ export default function GeneralCard() {
   const th = getTH(parseInt(date));
 
   return (
-    <div className="bg-white rounded-md w-full p-8 flex flex-col justify-between">
+    <div className="bg-white rounded-md w-full p-8 flex flex-col justify-between shadow-sm">
       <div>
-        <h1 className="text-4xl opacity-50 mb-1">
+        <h1 className="text-3xl opacity-80 mb-1">
           Welcome back, <b>{name}</b>!
         </h1>
-        <p className="text-lg opacity-50">
+        <p className="text-lg opacity-60">
           Today is <b>{weekday}</b>, the{" "}
           <b>
-            {date + th}
+            {date + th + " "}
             of {month}
           </b>
           .
         </p>
       </div>
-      <div>
-        <p className="opacity-50 mb-1">Quote of the day</p>
-        <div className="bg-[#FAF4EF] rounded-md h-28 flex items-center justify-center">
-          <p className="text-lg text-center m-4">Teamwork makes dreams work!</p>
-        </div>
+      <div className="bg-[#FAF4EF] rounded-md h-28 flex items-center justify-center">
+        <p className="text-xl text-center m-4 font-serif">Teamwork makes dreams work!</p>
       </div>
     </div>
   );
