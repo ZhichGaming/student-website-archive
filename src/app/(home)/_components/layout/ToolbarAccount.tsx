@@ -10,7 +10,7 @@ export default function ToolbarAccount() {
   return (
     <>
       <TextSkeleton className="h-3 ml-2" w={8} keyAwaited={info} times={2} justify={1}>
-        <p>{info?.info?.name}</p>
+        {info?.info?.name}
       </TextSkeleton>
 
       <Skeleton className="w-12 h-12 ml-2" keyAwaited={info}>
