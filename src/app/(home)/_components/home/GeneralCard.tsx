@@ -1,5 +1,6 @@
 "use client";
 
+import { TextSkeleton } from "../loading/Skeleton";
 import { type InfoContext, useInfo } from "../../../useInfo";
 import { useEffect } from "react";
 
@@ -17,17 +18,18 @@ export default function GeneralCard() {
   return (
     <div className="bg-white rounded-md w-full p-8 flex flex-col justify-between shadow-sm">
       <div>
-        <h1 className="text-3xl opacity-80 mb-1">
-          Welcome back, <b>{name}</b>!
-        </h1>
-        <p className="text-lg opacity-60">
+        <TextSkeleton className="text-3xl h-10 opacity-80 mb-1" w={30} keyAwaited={name}>
+          <h1 className="text-3xl opacity-80 mb-1">
+            Welcome back, <b>{name}</b>!
+          </h1>
+        </TextSkeleton>
+        <TextSkeleton className="text-lg h-5 opacity-60" w={20} keyAwaited={name}>
           Today is <b>{weekday}</b>, the{" "}
           <b>
-            {date + th + " "}
-            of {month}
+            {date + th} of {month}
           </b>
           .
-        </p>
+        </TextSkeleton>
       </div>
       <div className="bg-[#FAF4EF] rounded-md h-28 flex items-center justify-center">
         <p className="text-lg text-center m-4 font-serif">{quote?.quote ?? "Loading quote of the day..."}</p>

@@ -14,6 +14,8 @@ export async function GET(request: NextRequest) {
 
   const info: Info = {
     id: data.CleUnique,
+    time: data.PeriodeEtudesCarteIdentite,
+    semester: data.EtapeCourante,
     info: {
       name: data.Prenom + " " + data.Nom,
       permcode: data.CodePermanent,
@@ -26,7 +28,6 @@ export async function GET(request: NextRequest) {
       barcode: data.CodeBarre,
     },
   };
-  console.log(info);
 
   return NextResponse.json(info);
 }
