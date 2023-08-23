@@ -35,7 +35,7 @@ export default function EmailsCard({ selectedSorting, isReadChecked, isUnreadChe
 	});
 
 	return (
-		<div className="bg-white rounded-md h-full p-4 flex flex-col flex-grow overflow-hidden">
+		<div className="bg-white rounded-md h-full p-4 flex flex-col flex-grow overflow-hidden shadow-sm">
 			{emailsHtml}
 		</div>
 	);

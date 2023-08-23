@@ -16,7 +16,7 @@ export default function NavigationCard({ selectedSorting, onSortingChange, isRea
 	};
 
 	return (
-		<div className="bg-white rounded-md h-full p-4 flex flex-col space-y-4 w-[275px]">
+		<div className="bg-white rounded-md h-full p-4 flex flex-col space-y-4 w-[275px] shadow-sm">
 			<div>
 				<button className="flex items-center pl-2 pr-2 p-1 rounded-md hover:bg-black hover:bg-opacity-10 w-full">
 					<i className="fa-solid fa-inbox mr-2 opacity-50"></i>
