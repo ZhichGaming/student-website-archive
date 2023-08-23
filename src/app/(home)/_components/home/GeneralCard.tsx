@@ -1,23 +1,29 @@
 "use client";
 
-import { useInfo } from "../../../useInfo";
 import { TextSkeleton } from "../loading/Skeleton";
+import { type InfoContext, useInfo } from "../../../useInfo";
+import { useEffect } from "react";
 
 export default function GeneralCard() {
   const [weekday, day] = new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" }).split(", ");
   const [month, date] = day.split(" ");
   const name = useInfo()[0]?.info?.name;
   const th = getTH(parseInt(date));
+  const [,{getQuote},,quote]: InfoContext = useInfo();
+
+  useEffect(() => {
+    getQuote();
+  }, []);
 
   return (
-    <div className="bg-white rounded-md w-full p-8 flex flex-col justify-between">
+    <div className="bg-white rounded-md w-full p-8 flex flex-col justify-between shadow-sm">
       <div>
-        <TextSkeleton className="text-4xl h-10 opacity-50 mb-1" w={30} keyAwaited={name}>
-          <h1 className="text-4xl opacity-50 mb-1">
+        <TextSkeleton className="text-3xl h-10 opacity-80 mb-1" w={30} keyAwaited={name}>
+          <h1 className="text-3xl opacity-80 mb-1">
             Welcome back, <b>{name}</b>!
           </h1>
         </TextSkeleton>
-        <TextSkeleton className="text-4xl h-5 opacity-50 mb-1" w={20} keyAwaited={name}>
+        <TextSkeleton className="text-lg h-5 opacity-60" w={20} keyAwaited={name}>
           Today is <b>{weekday}</b>, the{" "}
           <b>
             {date + th} of {month}
@@ -25,11 +31,8 @@ export default function GeneralCard() {
           .
         </TextSkeleton>
       </div>
-      <div>
-        <p className="opacity-50 mb-1">Quote of the day</p>
-        <div className="bg-[#FAF4EF] rounded-md h-28 flex items-center justify-center">
-          <p className="text-lg text-center m-4">Teamwork makes dreams work!</p>
-        </div>
+      <div className="bg-[#FAF4EF] rounded-md h-28 flex items-center justify-center">
+        <p className="text-lg text-center m-4 font-serif">{quote?.quote ?? "Loading quote of the day..."}</p>
       </div>
     </div>
   );

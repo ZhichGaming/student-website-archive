@@ -1,8 +1,8 @@
 "use client"
 
 import { useState } from "react";
-import NavigationCard from "./_components/NavigationCard";
-import EmailsCard from "./_components/EmailsCard";
+import NavigationCard from "./_components/navigationCard";
+import EmailsCard from "./_components/emailsCard";
 
 export default function EmailPage({}) {
   const [selectedSorting, setSelectedSorting] = useState("dd");

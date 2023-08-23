@@ -17,8 +17,8 @@ export default function ClassesCard() {
   }, [now]);
 
   return (
-    <div className="bg-white rounded-md w-full h-full p-8 flex flex-col space-y-4">
-      <p className="text-lg opacity-50">
+    <div className="bg-white rounded-md w-full h-full p-8 flex flex-col space-y-4 shadow-sm">
+      <p className="text-lg opacity-60">
         <b>Today&apos;s Classes</b>
       </p>
       <div className="flex flex-col justify-between space-y-2">
