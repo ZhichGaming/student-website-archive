@@ -3,9 +3,17 @@
 import Image from "next/image";
 import { type InfoContext, useInfo } from "../../../useInfo";
 import { Skeleton, TextSkeleton } from "../loading/Skeleton";
+import { useEffect } from "react";
+import React from "react";
 
 export default function ToolbarAccount() {
   const [info]: InfoContext = useInfo();
+
+  useEffect(() => {
+    if (info?.info?.name === undefined) {
+      window.location.href = "/login";
+    }
+  }, []);
 
   return (
     <>
