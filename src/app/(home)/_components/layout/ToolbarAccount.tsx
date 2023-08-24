@@ -5,7 +5,7 @@ import { type InfoContext, useInfo } from "../../../useInfo";
 import { Skeleton, TextSkeleton } from "../loading/Skeleton";
 
 export default function ToolbarAccount() {
-  const [info]: InfoContext = useInfo();
+  const [{info}]: InfoContext = useInfo();
 
   return (
     <>

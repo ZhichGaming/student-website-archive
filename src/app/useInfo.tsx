@@ -167,7 +167,7 @@ function InfoContextProvider({ children }: { children: ReactNode }) {
     return "connected";
   };
 
-  return <infoContext.Provider value={[info, { login, getInfo, getQuote }, today, quote]}>{children}</infoContext.Provider>;
+  return <infoContext.Provider value={[{ info, today, classes, grades, quote }, { login, getInfo, getClasses, getToday, getQuote }]}>{children}</infoContext.Provider>;
 }
 
 function useInfo() {
@@ -177,12 +177,18 @@ function useInfo() {
 export { InfoContextProvider, useInfo, type InfoContext };
 
 type InfoContext = [
-  Info,
+  {
+    info: Info,
+    today: Today,
+    classes: Class[],
+    grades: Grade[],
+    quote: Quote
+  },
   {
     login: (username: string, password: string) => Promise<string>;
     getInfo: (token: string) => Promise<string>;
+    getClasses: (token: string, id: string, time: string, semester: string) => Promise<void>;
+    getToday: (token: string, id: string) => Promise<void>;
     getQuote: () => Promise<string>;
-  },
-  Today,
-  Quote
+  }
 ];

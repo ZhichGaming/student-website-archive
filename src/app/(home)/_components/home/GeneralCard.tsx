@@ -7,9 +7,9 @@ import { useEffect } from "react";
 export default function GeneralCard() {
   const [weekday, day] = new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" }).split(", ");
   const [month, date] = day.split(" ");
-  const name = useInfo()[0]?.info?.name;
+  const name = useInfo()[0]?.info?.info?.name;
   const th = getTH(parseInt(date));
-  const [,{getQuote},,quote]: InfoContext = useInfo();
+  const [{quote},{getQuote}]: InfoContext = useInfo();
 
   useEffect(() => {
     getQuote();
